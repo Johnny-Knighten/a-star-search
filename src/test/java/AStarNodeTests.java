@@ -7,22 +7,22 @@ import org.mockito.Mockito;
 
 public class AStarNodeTests {
 
-    private AStarNode oneTestNode;
-    private AStarNode negOneTestNode;
-    private AStarNode zeroTestNode;
+    private AStarNode testNodeWithF1;
+    private AStarNode testNodeWithFNeg1;
+    private AStarNode testNodeWithF0;
 
     @Before
     public void setup() {
-        oneTestNode = Mockito.mock(AStarNode.class, Mockito.CALLS_REAL_METHODS);
-        Mockito.when(oneTestNode.getF())
+        testNodeWithF1 = Mockito.mock(AStarNode.class, Mockito.CALLS_REAL_METHODS);
+        Mockito.when(testNodeWithF1.getF())
                 .thenReturn(1);
 
-        negOneTestNode = Mockito.mock(AStarNode.class, Mockito.CALLS_REAL_METHODS);
-        Mockito.when(negOneTestNode.getF())
+        testNodeWithFNeg1 = Mockito.mock(AStarNode.class, Mockito.CALLS_REAL_METHODS);
+        Mockito.when(testNodeWithFNeg1.getF())
                 .thenReturn(-1);
 
-        zeroTestNode = Mockito.mock(AStarNode.class, Mockito.CALLS_REAL_METHODS);
-        Mockito.when(zeroTestNode.getF())
+        testNodeWithF0 = Mockito.mock(AStarNode.class, Mockito.CALLS_REAL_METHODS);
+        Mockito.when(testNodeWithF0.getF())
                 .thenReturn(0);
     }
 
@@ -32,17 +32,17 @@ public class AStarNodeTests {
 
     @Test
     public void compareFirstNodeHigherFValueThatSecondNode() {
-        Assert.assertEquals(1, oneTestNode.compare(oneTestNode, zeroTestNode));
+        Assert.assertTrue(testNodeWithF1.compare(testNodeWithF1, testNodeWithF0) > 0);
     }
 
     @Test
     public void compareFirstNodeEqualFValueToSecondNode() {
-        Assert.assertEquals(0, zeroTestNode.compare(zeroTestNode, zeroTestNode));
+        Assert.assertEquals(0, testNodeWithF0.compare(testNodeWithF0, testNodeWithF0));
     }
 
     @Test
     public void compareFirstNodeLowerFValueThanSecondNode() {
-        Assert.assertEquals(-1, negOneTestNode.compare(negOneTestNode, zeroTestNode));
+        Assert.assertTrue(testNodeWithFNeg1.compare(testNodeWithFNeg1, testNodeWithF0) < 0);
     }
 
 }
