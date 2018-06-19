@@ -75,7 +75,7 @@ public class EightPuzzle extends AStarNode<int[]> {
      * @return array list of successor states.
      */
     @Override
-    public ArrayList<AStarNode<int[]>> getSuccessors() throws Exception {
+    public ArrayList<AStarNode> getSuccessors() throws Exception {
         ArrayList<Integer> possibleNextMoves = new ArrayList<>();
 
         // Check Moving Empty Space Left
@@ -94,7 +94,7 @@ public class EightPuzzle extends AStarNode<int[]> {
         if(((this.emptySpaceLocation + 3) < 9) && (Math.floor(this.emptySpaceLocation / 3) != 2))
             possibleNextMoves.add(this.emptySpaceLocation + 3);
 
-        ArrayList<AStarNode<int[]>> successors = new ArrayList<>();
+        ArrayList<AStarNode> successors = new ArrayList<>();
         int[] successorBoard;
         for(Integer nextSpace: possibleNextMoves){
             successorBoard = Arrays.copyOf(this.getState(), this.getState().length);
