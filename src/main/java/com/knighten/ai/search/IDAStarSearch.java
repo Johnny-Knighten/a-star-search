@@ -25,66 +25,70 @@ public class IDAStarSearch {
      */
     public AStarNode search() throws Exception {
 
-        int fBoundary = initialState.calcH(goalState);
+        int currentFBound = initialState.calcH(goalState);
         ArrayList<AStarNode> path = new ArrayList<>();
         path.add(0, initialState);
 
-        int smallestFOverBound;
+        int smallestNewFBound;
         do {
-            smallestFOverBound = recur_search(path, 0, fBoundary);
+            smallestNewFBound = recur_search(path, 0, currentFBound);
 
-            if(smallestFOverBound == 0)
+            if(smallestNewFBound == 0)
                 return path.get(path.size()-1);
 
-            fBoundary = smallestFOverBound;
-        } while(smallestFOverBound != Integer.MAX_VALUE);
+            currentFBound = smallestNewFBound;
+        } while(currentFBound != Integer.MAX_VALUE);
 
         return null;
     }
 
     /**
      * Recursively searches down the children of nodes. Instantly stops when a node had a higher f value than the
-     * current iterations fBoundary. Will return the smallest f value that has surpassed the fBoundary, this f value
-     * will be used as the fBoundary in the next iteration.
+     * current iterations fBoundary. Will return the smallest f value that has surpassed the currentFBoundary, this f
+     * value will be used as the currentFBoundary in the next iteration.
      *
      * @param path list of nodes ordered by the order they were visited
      * @param graphCost current graph cost to get to the current node
-     * @param fBoundary the max f boundary for current iteration
+     * @param currentFBound the max f boundary for current iteration
      * @return the smallest f value in the  iteration that was greater than the fBoundary for the iteration
      */
-    private int recur_search(ArrayList<AStarNode> path, int graphCost, int fBoundary) throws Exception {
+    private int recur_search(ArrayList<AStarNode> path, int graphCost, int currentFBound) throws Exception {
 
         AStarNode currentNode = path.get(path.size()-1);
         currentNode.setH(currentNode.calcH(goalState));
         currentNode.setG(graphCost);
         currentNode.setF(graphCost + currentNode.getH());
 
-        if(currentNode.getF() > fBoundary)
+        // Current node has f larger than current bound
+        if(currentNode.getF() > currentFBound)
             return currentNode.getF();
 
+        // Found the goal node send signal to end recursion
         if(currentNode.equals(goalState))
             return 0;
 
-        int min = Integer.MAX_VALUE;
-
+        int minFFound = Integer.MAX_VALUE;
         ArrayList<AStarNode> children = currentNode.getSuccessors();
-        for(AStarNode child: children) {
 
+        // Expand on each child node
+        for(AStarNode child: children) {
+            // Verify child not already on path
             if(!path.contains(child)) {
                 path.add(child);
-                int smallestFOverBound = recur_search(path, currentNode.getG() + child.distFromParent(), fBoundary);
+                int minFOverBound = recur_search(path, currentNode.getG() + child.distFromParent(), currentFBound);
 
-                if(smallestFOverBound == 0)
+                // Signals to end recursion since goal was found
+                if(minFOverBound == 0)
                     return 0;
 
-                if(smallestFOverBound < min)
-                    min = smallestFOverBound;
+                if(minFOverBound < minFFound)
+                    minFFound = minFOverBound;
 
                 path.remove(path.size()-1);
             }
         }
 
-        return min;
+        return minFFound;
     }
 
     /**
@@ -105,5 +109,5 @@ public class IDAStarSearch {
 
         return path;
     }
-    
+
 }

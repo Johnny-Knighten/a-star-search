@@ -115,7 +115,7 @@ public class EightPuzzleTests {
     @Test
     public void createSuccessorsWithMiddleEmpty() throws Exception{
         EightPuzzle parentPuzzle = new EightPuzzle(new int[]{1,2,3,4,0,5,6,7,8});
-        ArrayList<AStarNode<int[]>> successors = parentPuzzle.getSuccessors();
+        ArrayList<AStarNode> successors = parentPuzzle.getSuccessors();
 
         EightPuzzle successor1 =  new EightPuzzle(new int[]{1,2,3,0,4,5,6,7,8});
         EightPuzzle successor2 =  new EightPuzzle(new int[]{1,2,3,4,5,0,6,7,8});
@@ -132,7 +132,7 @@ public class EightPuzzleTests {
     @Test
     public void createSuccessorsWithTopMiddleEmpty() throws Exception{
         EightPuzzle parentPuzzle = new EightPuzzle(new int[]{1,0,2,3,4,5,6,7,8});
-        ArrayList<AStarNode<int[]>> successors = parentPuzzle.getSuccessors();
+        ArrayList<AStarNode> successors = parentPuzzle.getSuccessors();
 
         EightPuzzle successor1 =  new EightPuzzle(new int[]{0,1,2,3,4,5,6,7,8});
         EightPuzzle successor2 =  new EightPuzzle(new int[]{1,2,0,3,4,5,6,7,8});
@@ -147,7 +147,7 @@ public class EightPuzzleTests {
     @Test
     public void createSuccessorsWithBottomMiddleEmpty() throws Exception{
         EightPuzzle parentPuzzle = new EightPuzzle(new int[]{1,2,3,4,5,6,7,0,8});
-        ArrayList<AStarNode<int[]>> successors = parentPuzzle.getSuccessors();
+        ArrayList<AStarNode> successors = parentPuzzle.getSuccessors();
 
         EightPuzzle successor1 =  new EightPuzzle(new int[]{1,2,3,4,5,6,0,7,8});
         EightPuzzle successor2 =  new EightPuzzle(new int[]{1,2,3,4,5,6,7,8,0});
@@ -162,7 +162,7 @@ public class EightPuzzleTests {
     @Test
     public void createSuccessorsWithLeftMiddleEmpty() throws Exception{
         EightPuzzle parentPuzzle = new EightPuzzle(new int[]{1,2,3,0,4,5,6,7,8});
-        ArrayList<AStarNode<int[]>> successors = parentPuzzle.getSuccessors();
+        ArrayList<AStarNode> successors = parentPuzzle.getSuccessors();
 
         EightPuzzle successor1 =  new EightPuzzle(new int[]{1,2,3,4,0,5,6,7,8});
         EightPuzzle successor2 =  new EightPuzzle(new int[]{0,2,3,1,4,5,6,7,8});
@@ -177,7 +177,7 @@ public class EightPuzzleTests {
     @Test
     public void createSuccessorsWithRightMiddleEmpty() throws Exception{
         EightPuzzle parentPuzzle = new EightPuzzle(new int[]{1,2,3,4,5,0,6,7,8});
-        ArrayList<AStarNode<int[]>> successors = parentPuzzle.getSuccessors();
+        ArrayList<AStarNode> successors = parentPuzzle.getSuccessors();
 
         EightPuzzle successor1 =  new EightPuzzle(new int[]{1,2,3,4,0,5,6,7,8});
         EightPuzzle successor2 =  new EightPuzzle(new int[]{1,2,0,4,5,3,6,7,8});
@@ -192,7 +192,7 @@ public class EightPuzzleTests {
     @Test
     public void createSuccessorsWithTopLeftEmpty() throws Exception{
         EightPuzzle parentPuzzle = new EightPuzzle(new int[]{0,1,2,3,4,5,6,7,8});
-        ArrayList<AStarNode<int[]>> successors = parentPuzzle.getSuccessors();
+        ArrayList<AStarNode> successors = parentPuzzle.getSuccessors();
 
         EightPuzzle successor1 =  new EightPuzzle(new int[]{1,0,2,3,4,5,6,7,8});
         EightPuzzle successor2 =  new EightPuzzle(new int[]{3,1,2,0,4,5,6,7,8});
@@ -205,7 +205,7 @@ public class EightPuzzleTests {
     @Test
     public void createSuccessorsWithTopRightEmpty() throws Exception{
         EightPuzzle parentPuzzle = new EightPuzzle(new int[]{1,2,0,3,4,5,6,7,8});
-        ArrayList<AStarNode<int[]>> successors = parentPuzzle.getSuccessors();
+        ArrayList<AStarNode> successors = parentPuzzle.getSuccessors();
 
         EightPuzzle successor1 =  new EightPuzzle(new int[]{1,0,2,3,4,5,6,7,8});
         EightPuzzle successor2 =  new EightPuzzle(new int[]{1,2,5,3,4,0,6,7,8});
@@ -218,7 +218,7 @@ public class EightPuzzleTests {
     @Test
     public void createSuccessorsWithBottomLeftEmpty() throws Exception{
         EightPuzzle parentPuzzle = new EightPuzzle(new int[]{1,2,3,4,5,6,0,7,8});
-        ArrayList<AStarNode<int[]>> successors = parentPuzzle.getSuccessors();
+        ArrayList<AStarNode> successors = parentPuzzle.getSuccessors();
 
         EightPuzzle successor1 =  new EightPuzzle(new int[]{1,2,3,4,5,6,7,0,8});
         EightPuzzle successor2 =  new EightPuzzle(new int[]{1,2,3,0,5,6,4,7,8});
@@ -231,7 +231,7 @@ public class EightPuzzleTests {
     @Test
     public void createSuccessorsWithBottomRightEmpty() throws Exception{
         EightPuzzle parentPuzzle = new EightPuzzle(new int[]{1,2,3,4,5,6,7,8,0});
-        ArrayList<AStarNode<int[]>> successors = parentPuzzle.getSuccessors();
+        ArrayList<AStarNode> successors = parentPuzzle.getSuccessors();
 
         EightPuzzle successor1 =  new EightPuzzle(new int[]{1,2,3,4,5,6,7,0,8});
         EightPuzzle successor2 =  new EightPuzzle(new int[]{1,2,3,4,5,0,7,8,6});
