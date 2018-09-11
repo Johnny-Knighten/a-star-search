@@ -136,7 +136,7 @@ public abstract class AStarNode<T> implements Comparator<AStarNode<T>>{
      *
      * @return returns distance to node's parent
      */
-    public abstract  int distFromParent();
+    public abstract int distFromParent();
 
     /**
      * Calculates the heuristic score h() between the node and a goal node.

@@ -2,6 +2,7 @@ package com.knighten.ai.search;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -179,5 +180,34 @@ public class ThreePuzzle extends AStarNode<int[]> {
      * @return array representing the two dimensional index
      */
     private int[] oneDimIndToTwoInd(int flatIndex) {return new int[]{flatIndex % 2, (int) Math.floor(flatIndex / 2)};}
+
+
+    // Usage Example
+    public static void main(String[] args) throws Exception {
+
+        int[] initStateArray = {0,3,2,1};
+        int[] goalStateArray = {1,2,3,0};
+
+        ThreePuzzle initialState = new ThreePuzzle(initStateArray);
+        ThreePuzzle goalState = new ThreePuzzle(goalStateArray);
+
+        AStarSearch searcher = new AStarSearch(initialState, goalState);
+        AStarNode finalSearchNode = searcher.search();
+
+        System.out.println("Initial State");
+        System.out.println(initialState);
+
+        System.out.println("Goal State");
+        System.out.println(goalState);
+
+        List<AStarNode> path = searcher.getPath(finalSearchNode);
+        int step = 1;
+        for(AStarNode node: path) {
+            System.out.println("Step " + step);
+            System.out.println(node);
+            step++;
+        }
+
+    }
 
 }
