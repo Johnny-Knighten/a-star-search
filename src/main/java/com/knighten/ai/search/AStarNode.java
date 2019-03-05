@@ -139,14 +139,6 @@ public abstract class AStarNode<T> implements Comparator<AStarNode<T>>{
     public abstract int distFromParent();
 
     /**
-     * Calculates the heuristic score h() between the node and a goal node.
-     *
-     * @param goalNode goal node of search
-     * @return heuristic score h() for node
-     */
-    public abstract int calcH(AStarNode<T> goalNode);
-
-    /**
      * Generates the hash code for the node. The hash should be based on node state. We want nodes with the same
      * state(not same f()) to collide. This allows for determining if a node has been visited before but with lower f().
      *

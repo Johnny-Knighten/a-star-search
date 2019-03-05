@@ -1,5 +1,7 @@
 package com.knighten.ai.search;
 
+import com.knighten.ai.search.interfaces.IHeuristicFunction;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,6 +11,7 @@ public class AStarSearch {
 
     private AStarNode initialState;
     private AStarNode goalState;
+    private IHeuristicFunction heuristicFunction;
 
     /**
      * Creates an AStarSearch with initial and goal states
@@ -16,9 +19,10 @@ public class AStarSearch {
      * @param initialState the state where the search begins
      * @param goalState the state where the search ends
      */
-    public AStarSearch(AStarNode initialState, AStarNode goalState) {
+    public AStarSearch(AStarNode initialState, AStarNode goalState, IHeuristicFunction heuristicFunction) {
         this.initialState = initialState;
         this.goalState = goalState;
+        this.heuristicFunction = heuristicFunction;
     }
 
     /**
@@ -33,7 +37,7 @@ public class AStarSearch {
         PriorityQueue<AStarNode> openSet = new PriorityQueue<>(1, goalState);
         // Used to quickly determine if node with same state is in the open set and to retrieve that states best f
         HashMap<AStarNode, Integer> openSetHash = new HashMap<>();
-        initialState.setF(initialState.calcH(goalState));
+        initialState.setF(this.heuristicFunction.calculateHeuristic(this.initialState, this.goalState));
         openSet.add(initialState);
         openSetHash.put(initialState, initialState.getF());
 
@@ -52,7 +56,7 @@ public class AStarSearch {
                     continue;
 
                 childState.setG(childState.getParent().getG() + childState.distFromParent());
-                childState.setH(childState.calcH(goalState));
+                childState.setH(this.heuristicFunction.calculateHeuristic(childState, this.goalState));
                 childState.setF(childState.getG() + childState.getH());
 
                 // Note the short circuit logic

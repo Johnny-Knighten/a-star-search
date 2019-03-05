@@ -1,6 +1,8 @@
 import com.knighten.ai.search.AStarNode;
+import com.knighten.ai.search.interfaces.IHeuristicFunction;
 import com.knighten.ai.search.npuzzle.EightPuzzle;
 import com.knighten.ai.search.IDAStarSearch;
+import com.knighten.ai.search.npuzzle.NPuzzleManhattanDist;
 import com.knighten.ai.search.npuzzle.ThreePuzzle;
 import org.junit.Assert;
 import org.junit.Before;
@@ -46,6 +48,8 @@ public class IDAStarSearchTests {
     private ThreePuzzle sevenMoveInitBoard3Puzz;
     private ThreePuzzle noSolutionInitBoard3Puzz;
     private ThreePuzzle oneMoveInitBoard3Puzz;
+
+    private IHeuristicFunction manhattanDist;
 
 
     @Before
@@ -101,6 +105,8 @@ public class IDAStarSearchTests {
 
         noSolutionInit3Puzz = new int[]{3,0,2,1};
         noSolutionInitBoard3Puzz = new ThreePuzzle(noSolutionInit3Puzz);
+
+        manhattanDist = new NPuzzleManhattanDist();
     }
 
     //////////////////////////////////////////////
@@ -109,7 +115,7 @@ public class IDAStarSearchTests {
 
     @Test
     public void noMovesNeeded8Puzz() throws Exception {
-        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard8Puzz, standardGoalBoard8Puzz);
+        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard8Puzz, standardGoalBoard8Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -118,7 +124,7 @@ public class IDAStarSearchTests {
 
     @Test
     public void oneMoveNeeded8Puzz() throws Exception {
-        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard8Puzz, oneMoveStandardInitBoard8Puzz);
+        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard8Puzz, oneMoveStandardInitBoard8Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -127,7 +133,7 @@ public class IDAStarSearchTests {
 
     @Test
     public void twoMovesNeeded8Puzz() throws Exception {
-        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard8Puzz, twoMoveStandardInitBoard8Puzz);
+        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard8Puzz, twoMoveStandardInitBoard8Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -136,7 +142,7 @@ public class IDAStarSearchTests {
 
     @Test
     public void sevenMovesNeeded8Puzz() throws Exception {
-        IDAStarSearch searcher = new IDAStarSearch(sevenMoveGoalBoard8Puzz, sevenMoveInitBoard8Puzz);
+        IDAStarSearch searcher = new IDAStarSearch(sevenMoveGoalBoard8Puzz, sevenMoveInitBoard8Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -145,7 +151,7 @@ public class IDAStarSearchTests {
 
     @Test
     public void twentyTwoMove8Puzz() throws Exception {
-        IDAStarSearch searcher = new IDAStarSearch(twentyTwoMoveGoalBoard8Puzz, twentyTwoMoveInitBoard8Puzz);
+        IDAStarSearch searcher = new IDAStarSearch(twentyTwoMoveGoalBoard8Puzz, twentyTwoMoveInitBoard8Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -154,7 +160,7 @@ public class IDAStarSearchTests {
 
     @Test
     public void twentySixMove8Puzz() throws Exception {
-        IDAStarSearch searcher = new IDAStarSearch(twentySixMoveGoalBoard8Puzz, twentySixMoveInitBoard8Puzz);
+        IDAStarSearch searcher = new IDAStarSearch(twentySixMoveGoalBoard8Puzz, twentySixMoveInitBoard8Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -163,7 +169,7 @@ public class IDAStarSearchTests {
 
     @Test
     public void thirtyOneMove8Puzz() throws Exception {
-        IDAStarSearch searcher = new IDAStarSearch(thirtyOneMoveGoalBoard8Puzz, thirtyOneMoveInitBoard8Puzz);
+        IDAStarSearch searcher = new IDAStarSearch(thirtyOneMoveGoalBoard8Puzz, thirtyOneMoveInitBoard8Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -186,7 +192,7 @@ public class IDAStarSearchTests {
 
     @Test
     public void noMovesNeeded3Puzz() throws Exception {
-        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard3Puzz, standardGoalBoard3Puzz);
+        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard3Puzz, standardGoalBoard3Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -195,7 +201,7 @@ public class IDAStarSearchTests {
 
     @Test
     public void oneMoveNeeded3Puzz() throws Exception {
-        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard3Puzz, oneMoveInitBoard3Puzz);
+        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard3Puzz, oneMoveInitBoard3Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -204,7 +210,7 @@ public class IDAStarSearchTests {
 
     @Test
     public void sevenMovesNeeded3Puzz() throws Exception {
-        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard3Puzz, sevenMoveInitBoard3Puzz);
+        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard3Puzz, sevenMoveInitBoard3Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -213,7 +219,7 @@ public class IDAStarSearchTests {
 
     @Test
     public void noSolution3Puzz() throws Exception {
-        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard3Puzz, noSolutionInitBoard3Puzz);
+        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard3Puzz, noSolutionInitBoard3Puzz, manhattanDist);
         AStarNode solution = searcher.search();
 
         Assert.assertNull(solution);

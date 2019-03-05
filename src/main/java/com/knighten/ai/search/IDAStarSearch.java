@@ -1,11 +1,14 @@
 package com.knighten.ai.search;
 
+import com.knighten.ai.search.interfaces.IHeuristicFunction;
+
 import java.util.ArrayList;
 
 public class IDAStarSearch {
 
     private AStarNode initialState;
     private AStarNode goalState;
+    private IHeuristicFunction heuristicFunction;
 
     /**
      * Creates an AStarSearch with initial and goal states
@@ -13,9 +16,10 @@ public class IDAStarSearch {
      * @param initialState the state where the search begins
      * @param goalState the state where the search ends
      */
-    public IDAStarSearch(AStarNode initialState, AStarNode goalState) {
+    public IDAStarSearch(AStarNode initialState, AStarNode goalState, IHeuristicFunction heuristicFunction) {
         this.initialState = initialState;
         this.goalState = goalState;
+        this.heuristicFunction = heuristicFunction;
     }
 
     /**
@@ -25,7 +29,7 @@ public class IDAStarSearch {
      */
     public AStarNode search() throws Exception {
 
-        int currentFBound = initialState.calcH(goalState);
+        int currentFBound = this.heuristicFunction.calculateHeuristic(initialState, goalState);
         ArrayList<AStarNode> path = new ArrayList<>();
         path.add(0, initialState);
 
@@ -55,7 +59,7 @@ public class IDAStarSearch {
     private int recur_search(ArrayList<AStarNode> path, int graphCost, int currentFBound) throws Exception {
 
         AStarNode currentNode = path.get(path.size()-1);
-        currentNode.setH(currentNode.calcH(goalState));
+        currentNode.setH(this.heuristicFunction.calculateHeuristic(currentNode, this.goalState));
         currentNode.setG(graphCost);
         currentNode.setF(graphCost + currentNode.getH());
 

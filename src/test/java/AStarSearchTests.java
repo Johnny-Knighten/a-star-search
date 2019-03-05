@@ -1,6 +1,8 @@
 import com.knighten.ai.search.AStarNode;
 import com.knighten.ai.search.AStarSearch;
+import com.knighten.ai.search.interfaces.IHeuristicFunction;
 import com.knighten.ai.search.npuzzle.EightPuzzle;
+import com.knighten.ai.search.npuzzle.NPuzzleManhattanDist;
 import com.knighten.ai.search.npuzzle.ThreePuzzle;
 import org.junit.Assert;
 import org.junit.Before;
@@ -46,6 +48,8 @@ public class AStarSearchTests {
     private ThreePuzzle sevenMoveInitBoard3Puzz;
     private ThreePuzzle noSolutionInitBoard3Puzz;
     private ThreePuzzle oneMoveInitBoard3Puzz;
+
+    private IHeuristicFunction manhattanDist;
 
 
     @Before
@@ -101,6 +105,10 @@ public class AStarSearchTests {
 
         noSolutionInit3Puzz = new int[]{3,0,2,1};
         noSolutionInitBoard3Puzz = new ThreePuzzle(noSolutionInit3Puzz);
+
+        manhattanDist = new NPuzzleManhattanDist();
+
+
     }
 
     //////////////////////////////////////////////
@@ -109,7 +117,7 @@ public class AStarSearchTests {
 
     @Test
     public void noMovesNeeded8Puzz() throws Exception {
-        AStarSearch searcher = new AStarSearch(standardGoalBoard8Puzz, standardGoalBoard8Puzz);
+        AStarSearch searcher = new AStarSearch(standardGoalBoard8Puzz, standardGoalBoard8Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -118,7 +126,7 @@ public class AStarSearchTests {
 
     @Test
     public void oneMoveNeeded8Puzz() throws Exception {
-        AStarSearch searcher = new AStarSearch(standardGoalBoard8Puzz, oneMoveStandardInitBoard8Puzz);
+        AStarSearch searcher = new AStarSearch(standardGoalBoard8Puzz, oneMoveStandardInitBoard8Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -127,7 +135,7 @@ public class AStarSearchTests {
 
     @Test
     public void twoMovesNeeded8Puzz() throws Exception {
-        AStarSearch searcher = new AStarSearch(standardGoalBoard8Puzz, twoMoveStandardInitBoard8Puzz);
+        AStarSearch searcher = new AStarSearch(standardGoalBoard8Puzz, twoMoveStandardInitBoard8Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -136,7 +144,7 @@ public class AStarSearchTests {
 
     @Test
     public void sevenMovesNeeded8Puzz() throws Exception {
-        AStarSearch searcher = new AStarSearch(sevenMoveGoalBoard8Puzz, sevenMoveInitBoard8Puzz);
+        AStarSearch searcher = new AStarSearch(sevenMoveGoalBoard8Puzz, sevenMoveInitBoard8Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -145,7 +153,7 @@ public class AStarSearchTests {
 
     @Test
     public void twentyTwoMove8Puzz() throws Exception {
-        AStarSearch searcher = new AStarSearch(twentyTwoMoveGoalBoard8Puzz, twentyTwoMoveInitBoard8Puzz);
+        AStarSearch searcher = new AStarSearch(twentyTwoMoveGoalBoard8Puzz, twentyTwoMoveInitBoard8Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -154,7 +162,7 @@ public class AStarSearchTests {
 
     @Test
     public void twentySixMove8Puzz() throws Exception {
-        AStarSearch searcher = new AStarSearch(twentySixMoveGoalBoard8Puzz, twentySixMoveInitBoard8Puzz);
+        AStarSearch searcher = new AStarSearch(twentySixMoveGoalBoard8Puzz, twentySixMoveInitBoard8Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -163,7 +171,7 @@ public class AStarSearchTests {
 
     @Test
     public void thirtyOneMove8Puzz() throws Exception {
-        AStarSearch searcher = new AStarSearch(thirtyOneMoveGoalBoard8Puzz, thirtyOneMoveInitBoard8Puzz);
+        AStarSearch searcher = new AStarSearch(thirtyOneMoveGoalBoard8Puzz, thirtyOneMoveInitBoard8Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -172,7 +180,7 @@ public class AStarSearchTests {
 
     @Test
     public void noSolution8Puzz() throws Exception {
-        AStarSearch searcher = new AStarSearch(noSolutionGoalBoard8Puzz, noSolutionInitBoard8Puzz);
+        AStarSearch searcher = new AStarSearch(noSolutionGoalBoard8Puzz, noSolutionInitBoard8Puzz, manhattanDist);
         AStarNode solution = searcher.search();
 
         Assert.assertNull(solution);
@@ -185,7 +193,7 @@ public class AStarSearchTests {
 
     @Test
     public void noMovesNeeded3Puzz() throws Exception {
-        AStarSearch searcher = new AStarSearch(standardGoalBoard3Puzz, standardGoalBoard3Puzz);
+        AStarSearch searcher = new AStarSearch(standardGoalBoard3Puzz, standardGoalBoard3Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -194,7 +202,7 @@ public class AStarSearchTests {
 
     @Test
     public void oneMoveNeeded3Puzz() throws Exception {
-        AStarSearch searcher = new AStarSearch(standardGoalBoard3Puzz, oneMoveInitBoard3Puzz);
+        AStarSearch searcher = new AStarSearch(standardGoalBoard3Puzz, oneMoveInitBoard3Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -203,7 +211,7 @@ public class AStarSearchTests {
 
     @Test
     public void sevenMovesNeeded3Puzz() throws Exception {
-        AStarSearch searcher = new AStarSearch(standardGoalBoard3Puzz, sevenMoveInitBoard3Puzz);
+        AStarSearch searcher = new AStarSearch(standardGoalBoard3Puzz, sevenMoveInitBoard3Puzz, manhattanDist);
         AStarNode solution = searcher.search();
         ArrayList<AStarNode> path = searcher.getPath(solution);
 
@@ -212,7 +220,7 @@ public class AStarSearchTests {
 
     @Test
     public void noSolution3Puzz() throws Exception {
-        AStarSearch searcher = new AStarSearch(standardGoalBoard3Puzz, noSolutionInitBoard3Puzz);
+        AStarSearch searcher = new AStarSearch(standardGoalBoard3Puzz, noSolutionInitBoard3Puzz, manhattanDist);
         AStarNode solution = searcher.search();
 
         Assert.assertNull(solution);

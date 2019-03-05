@@ -242,58 +242,6 @@ public class EightPuzzleTests {
     }
 
 
-    /////////////////////////
-    // Tests - Calculate H //
-    /////////////////////////
-
-    @Test
-    public void calcHForMatchWithGoalNode() throws Exception {
-        EightPuzzle board = new EightPuzzle(puzzleBoardSolution);
-        EightPuzzle goalBoard = new EightPuzzle(puzzleBoardSolution);
-        Assert.assertEquals(0, board.calcH(goalBoard));
-    }
-
-    @Test
-    public void calcHForNonGoalNodeBestCase() throws Exception {
-        EightPuzzle board = new EightPuzzle(new int[]{1,0,2,3,4,5,6,7,8});
-        EightPuzzle goalBoard = new EightPuzzle(puzzleBoardSolution);
-
-        Assert.assertEquals(1, board.calcH(goalBoard));
-    }
-
-    @Test
-    public void calcHForNonGoalNodeWorstCase() throws Exception {
-        EightPuzzle board = new EightPuzzle(new int[]{8,7,6,5,4,3,2,1,0});
-        EightPuzzle goalBoard = new EightPuzzle(puzzleBoardSolution);
-
-        Assert.assertEquals(20, board.calcH(goalBoard));
-    }
-
-    @Test
-    public void calcHForNonGoalNodeCase1() throws Exception {
-        EightPuzzle board = new EightPuzzle(new int[]{1,2,0,3,4,5,6,7,8});
-        EightPuzzle goalBoard = new EightPuzzle(puzzleBoardSolution);
-
-        Assert.assertEquals(2, board.calcH(goalBoard));
-    }
-
-    @Test
-    public void calcHForNonGoalNodeCase2() throws Exception {
-        EightPuzzle board = new EightPuzzle(new int[]{1,2,3,4,5,0,6,7,8});
-        EightPuzzle goalBoard = new EightPuzzle(puzzleBoardSolution);
-
-        Assert.assertEquals(7, board.calcH(goalBoard));
-    }
-
-    @Test
-    public void calcHForNonGoalNodeCase3() throws Exception {
-        EightPuzzle board = new EightPuzzle(new int[]{6,3,2,0,8,1,4,5,7});
-        EightPuzzle goalBoard = new EightPuzzle(puzzleBoardSolution);
-
-        Assert.assertEquals(13, board.calcH(goalBoard));
-    }
-
-
     ///////////////////
     // Tests -  Hash //
     ///////////////////

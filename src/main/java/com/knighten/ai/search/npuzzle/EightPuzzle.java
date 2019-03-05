@@ -128,44 +128,6 @@ public class EightPuzzle extends AStarNode<int[]> {
     @Override
     public int distFromParent() {return 1;}
 
-    /**
-     * Calculates the heuristic score for the puzzle given a goal puzzle. Calculates the manhattan distances for every
-     * number on the puzzle board(the empty space is not part of the calculation).
-     *
-     *@return returns the calculated h() score
-     */
-    @Override
-    public int calcH(AStarNode<int[]> goalPuzzle) {
-        int score = 0;
-        int[] goalBoard = goalPuzzle.getState();
-        int[] currentBoard = this.getState();
-
-        for(int goalPosition=0; goalPosition<9; goalPosition++) {
-            if(goalBoard[goalPosition] == 0)
-                continue;
-
-            // Find Position In Current Puzzle That Matches Current Position In Goal Board
-            int matchingSpaceOnCurrentNode = 0;
-            for(int currentNodePosition=0; currentNodePosition<9; currentNodePosition++)
-                if(goalBoard[goalPosition] == currentBoard[currentNodePosition])
-                    matchingSpaceOnCurrentNode = currentNodePosition;
-
-            int[] currentIndices = oneDimIndToTwoInd(matchingSpaceOnCurrentNode);
-            int[] goalIndices = oneDimIndToTwoInd(goalPosition);
-
-            score += Math.abs(currentIndices[1] - goalIndices[1]) + Math.abs(currentIndices[0] - goalIndices[0]);
-        }
-
-        return score;
-    }
-
-    /**
-     * Converts a 1-dimensional index to a 2-dimensional index in a 3x3 grid.
-     *
-     * @param flatIndex the index in one dimension
-     * @return array representing the two dimensional index
-     */
-    private int[] oneDimIndToTwoInd(int flatIndex) {return new int[]{flatIndex % 3, (int) Math.floor(flatIndex / 3)};}
 
     /**
      * Converts the puzzle into its string representation as a 3x3 grid. An * is used instead of 0 to represent
@@ -188,9 +150,6 @@ public class EightPuzzle extends AStarNode<int[]> {
         return stringBuilder.toString();
     }
 
-
-
-
     // Usage Example
     public static void main(String[] args) throws Exception {
 
@@ -200,7 +159,9 @@ public class EightPuzzle extends AStarNode<int[]> {
         EightPuzzle initialState = new EightPuzzle(initStateArray);
         EightPuzzle goalState = new EightPuzzle(goalStateArray);
 
-        IDAStarSearch searcher = new IDAStarSearch(initialState, goalState);
+        NPuzzleManhattanDist heuristicFunction = new NPuzzleManhattanDist();
+
+        IDAStarSearch searcher = new IDAStarSearch(initialState, goalState, heuristicFunction);
         AStarNode finalSearchNode = searcher.search();
 
         System.out.println("Initial State");

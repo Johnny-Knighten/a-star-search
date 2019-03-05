@@ -61,7 +61,7 @@ public class NPuzzleManhattanDistTests {
         testObject.calculateHeuristic(mockSearchNode, null);
     }
 
-    
+
     ////////////////////
     // Method Testing //
     ////////////////////
