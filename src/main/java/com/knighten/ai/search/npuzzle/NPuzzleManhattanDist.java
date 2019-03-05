@@ -1,6 +1,6 @@
 package com.knighten.ai.search.npuzzle;
 
-import com.knighten.ai.search.AStarNode;
+import com.knighten.ai.search.AbstractAStarNode;
 import com.knighten.ai.search.interfaces.IHeuristicFunction;
 
 public class NPuzzleManhattanDist implements IHeuristicFunction {
@@ -17,7 +17,7 @@ public class NPuzzleManhattanDist implements IHeuristicFunction {
      * @return returns the calculated heuristic(h()) score
      */
     @Override
-    public int calculateHeuristic(AStarNode searchNode, AStarNode goalNode) {
+    public int calculateHeuristic(AbstractAStarNode searchNode, AbstractAStarNode goalNode) {
 
         if(searchNode == null)
             throw new IllegalArgumentException("Search Node Cannot Be Null");

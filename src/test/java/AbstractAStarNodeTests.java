@@ -1,33 +1,33 @@
+import com.knighten.ai.search.AbstractAStarNode;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.knighten.ai.search.AStarNode;
 import org.mockito.Mockito;
 
-public class AStarNodeTests {
+public class AbstractAStarNodeTests {
 
-    private AStarNode testNodeWithF1;
-    private AStarNode testNodeWithFNeg1;
-    private AStarNode testNodeWithF0;
+    private AbstractAStarNode testNodeWithF1;
+    private AbstractAStarNode testNodeWithFNeg1;
+    private AbstractAStarNode testNodeWithF0;
 
     @Before
     public void setup() {
-        testNodeWithF1 = Mockito.mock(AStarNode.class, Mockito.CALLS_REAL_METHODS);
+        testNodeWithF1 = Mockito.mock(AbstractAStarNode.class, Mockito.CALLS_REAL_METHODS);
         Mockito.when(testNodeWithF1.getF())
                 .thenReturn(1);
 
-        testNodeWithFNeg1 = Mockito.mock(AStarNode.class, Mockito.CALLS_REAL_METHODS);
+        testNodeWithFNeg1 = Mockito.mock(AbstractAStarNode.class, Mockito.CALLS_REAL_METHODS);
         Mockito.when(testNodeWithFNeg1.getF())
                 .thenReturn(-1);
 
-        testNodeWithF0 = Mockito.mock(AStarNode.class, Mockito.CALLS_REAL_METHODS);
+        testNodeWithF0 = Mockito.mock(AbstractAStarNode.class, Mockito.CALLS_REAL_METHODS);
         Mockito.when(testNodeWithF0.getF())
                 .thenReturn(0);
     }
 
     ///////////////////////////////////////////////////////
-    // Tests - compare(AStarNode node1, AStarNode node2) //
+    // Tests - compare(AbstractAStarNode node1, AbstractAStarNode node2) //
     ///////////////////////////////////////////////////////
 
     @Test

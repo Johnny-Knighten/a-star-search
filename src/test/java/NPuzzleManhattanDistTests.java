@@ -1,4 +1,4 @@
-import com.knighten.ai.search.AStarNode;
+import com.knighten.ai.search.AbstractAStarNode;
 import com.knighten.ai.search.npuzzle.EightPuzzle;
 import com.knighten.ai.search.npuzzle.NPuzzleManhattanDist;
 import com.knighten.ai.search.npuzzle.ThreePuzzle;
@@ -12,8 +12,8 @@ import static org.mockito.Mockito.verify;
 
 public class NPuzzleManhattanDistTests {
 
-    private AStarNode mockGoalNode;
-    private AStarNode mockSearchNode;
+    private AbstractAStarNode mockGoalNode;
+    private AbstractAStarNode mockSearchNode;
     private ThreePuzzle goalThreePuzzle;
     private ThreePuzzle searchThreePuzzleOneH;
     private ThreePuzzle searchThreePuzzleSixH;
@@ -27,10 +27,10 @@ public class NPuzzleManhattanDistTests {
 
     @Before
     public void setup() throws Exception {
-        mockGoalNode = Mockito.mock(AStarNode.class);
+        mockGoalNode = Mockito.mock(AbstractAStarNode.class);
         Mockito.when(mockGoalNode.getState()).thenReturn(new int[]{1});
 
-        mockSearchNode = Mockito.mock(AStarNode.class);
+        mockSearchNode = Mockito.mock(AbstractAStarNode.class);
         Mockito.when(mockGoalNode.getState()).thenReturn(new int[]{0});
 
         goalThreePuzzle = new ThreePuzzle(new int[]{0, 1, 2, 3});

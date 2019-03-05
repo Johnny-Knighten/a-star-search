@@ -8,7 +8,7 @@ import java.util.Comparator;
  *
  * @param <T> the type of the node's stored state
  */
-public abstract class AStarNode<T> implements Comparator<AStarNode<T>>{
+public abstract class AbstractAStarNode<T> implements Comparator<AbstractAStarNode<T>>{
 
     /**
      * Node's h() value.
@@ -28,7 +28,7 @@ public abstract class AStarNode<T> implements Comparator<AStarNode<T>>{
     /**
      * Node's parent.
      */
-    private AStarNode<T> parent;
+    private AbstractAStarNode<T> parent;
 
     /**
      * Node's state.
@@ -71,14 +71,14 @@ public abstract class AStarNode<T> implements Comparator<AStarNode<T>>{
      *
      * @return returns the node's parent
      */
-    public AStarNode getParent() {return this.parent;}
+    public AbstractAStarNode getParent() {return this.parent;}
 
     /**
      * Sets the node's parent. Initial nodes should have parent equal to NULL.
      *
      * @param parent the node's parent
      */
-    public void setParent(AStarNode parent) {this.parent = parent;}
+    public void setParent(AbstractAStarNode parent) {this.parent = parent;}
 
     /**
      * Returns the f() value of the node. Note it does not do the f() calculation
@@ -112,12 +112,12 @@ public abstract class AStarNode<T> implements Comparator<AStarNode<T>>{
     /**
      * Compares two AStarNodes' f() values. Used in priority queue.
      *
-     * @param node1 a AStarNode - treated as primary
-     * @param node2 another AStarNode - treated as secondary
+     * @param node1 a AbstractAStarNode - treated as primary
+     * @param node2 another AbstractAStarNode - treated as secondary
      * @return  negative if node1 LT node2; zero if node1==node2; positive if node1 GT node2;
      */
     @Override
-    public int compare(AStarNode<T> node1, AStarNode<T> node2) {return node1.getF() - node2.getF();}
+    public int compare(AbstractAStarNode<T> node1, AbstractAStarNode<T> node2) {return node1.getF() - node2.getF();}
 
 
     //////////////////////
@@ -129,7 +129,7 @@ public abstract class AStarNode<T> implements Comparator<AStarNode<T>>{
      *
      * @return list of successor nodes
      */
-    public abstract ArrayList<AStarNode> getSuccessors() throws Exception;
+    public abstract ArrayList<AbstractAStarNode> getSuccessors() throws Exception;
 
     /**
      * Returns the distance from the node to its parent.

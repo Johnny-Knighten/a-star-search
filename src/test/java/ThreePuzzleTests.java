@@ -1,4 +1,4 @@
-import com.knighten.ai.search.AStarNode;
+import com.knighten.ai.search.AbstractAStarNode;
 import com.knighten.ai.search.npuzzle.ThreePuzzle;
 import org.junit.Assert;
 import org.junit.Before;
@@ -115,7 +115,7 @@ public class ThreePuzzleTests {
     @Test
     public void createSuccessorsWithTopLeftEmpty() throws Exception{
         ThreePuzzle parentPuzzle = new ThreePuzzle(new int[]{0,1,2,3});
-        ArrayList<AStarNode> successors = parentPuzzle.getSuccessors();
+        ArrayList<AbstractAStarNode> successors = parentPuzzle.getSuccessors();
 
         ThreePuzzle successor1 =  new ThreePuzzle(new int[]{1,0,2,3});
         ThreePuzzle successor2 =  new ThreePuzzle(new int[]{2,1,0,3});
@@ -128,7 +128,7 @@ public class ThreePuzzleTests {
     @Test
     public void createSuccessorsWithTopRightEmpty() throws Exception {
         ThreePuzzle parentPuzzle = new ThreePuzzle(new int[]{1,0,2,3});
-        ArrayList<AStarNode> successors = parentPuzzle.getSuccessors();
+        ArrayList<AbstractAStarNode> successors = parentPuzzle.getSuccessors();
 
         ThreePuzzle successor1 =  new ThreePuzzle(new int[]{0,1,2,3});
         ThreePuzzle successor2 =  new ThreePuzzle(new int[]{1,3,2,0});
@@ -141,7 +141,7 @@ public class ThreePuzzleTests {
     @Test
     public void createSuccessorsWithBottomLeftEmpty() throws Exception{
         ThreePuzzle parentPuzzle = new ThreePuzzle(new int[]{1,2,0,3});
-        ArrayList<AStarNode> successors = parentPuzzle.getSuccessors();
+        ArrayList<AbstractAStarNode> successors = parentPuzzle.getSuccessors();
 
         ThreePuzzle successor1 =  new ThreePuzzle(new int[]{0,2,1,3});
         ThreePuzzle successor2 =  new ThreePuzzle(new int[]{1,2,3,0});
@@ -154,7 +154,7 @@ public class ThreePuzzleTests {
     @Test
     public void createSuccessorsWithBottomRightEmpty() throws Exception{
         ThreePuzzle parentPuzzle = new ThreePuzzle(new int[]{1,2,3,0});
-        ArrayList<AStarNode> successors = parentPuzzle.getSuccessors();
+        ArrayList<AbstractAStarNode> successors = parentPuzzle.getSuccessors();
 
         ThreePuzzle successor1 =  new ThreePuzzle(new int[]{1,2,0,3});
         ThreePuzzle successor2 =  new ThreePuzzle(new int[]{1,0,3,2});

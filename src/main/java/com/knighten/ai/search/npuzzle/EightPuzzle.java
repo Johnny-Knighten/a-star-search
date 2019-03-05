@@ -1,6 +1,6 @@
 package com.knighten.ai.search.npuzzle;
 
-import com.knighten.ai.search.AStarNode;
+import com.knighten.ai.search.AbstractAStarNode;
 import com.knighten.ai.search.IDAStarSearch;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * EightPuzzle is the state space(search node) representation of the eight-puzzle problem.
  */
-public class EightPuzzle extends AStarNode<int[]> {
+public class EightPuzzle extends AbstractAStarNode<int[]> {
 
     /**
      * The one dimensional position of the empty puzzle space(the zero).
@@ -79,7 +79,7 @@ public class EightPuzzle extends AStarNode<int[]> {
      * @return array list of successor states.
      */
     @Override
-    public ArrayList<AStarNode> getSuccessors() throws Exception {
+    public ArrayList<AbstractAStarNode> getSuccessors() throws Exception {
         ArrayList<Integer> possibleNextMoves = new ArrayList<>();
 
         // Check Moving Empty Space Left
@@ -98,7 +98,7 @@ public class EightPuzzle extends AStarNode<int[]> {
         if(((this.emptySpaceLocation + 3) < 9) && (Math.floor(this.emptySpaceLocation / 3) != 2))
             possibleNextMoves.add(this.emptySpaceLocation + 3);
 
-        ArrayList<AStarNode> successors = new ArrayList<>();
+        ArrayList<AbstractAStarNode> successors = new ArrayList<>();
         int[] successorBoard;
         for(Integer nextSpace: possibleNextMoves){
             successorBoard = Arrays.copyOf(this.getState(), this.getState().length);
@@ -162,7 +162,7 @@ public class EightPuzzle extends AStarNode<int[]> {
         NPuzzleManhattanDist heuristicFunction = new NPuzzleManhattanDist();
 
         IDAStarSearch searcher = new IDAStarSearch(initialState, goalState, heuristicFunction);
-        AStarNode finalSearchNode = searcher.search();
+        AbstractAStarNode finalSearchNode = searcher.search();
 
         System.out.println("Initial State");
         System.out.println(initialState);
@@ -170,9 +170,9 @@ public class EightPuzzle extends AStarNode<int[]> {
         System.out.println("Goal State");
         System.out.println(goalState);
 
-        List<AStarNode> path = searcher.getPath(finalSearchNode);
+        List<AbstractAStarNode> path = searcher.getPath(finalSearchNode);
         int step = 1;
-        for (AStarNode node : path) {
+        for (AbstractAStarNode node : path) {
             System.out.println("Step " + step);
             System.out.println(node);
             step++;

@@ -9,8 +9,8 @@ import java.util.PriorityQueue;
 
 public class AStarSearch {
 
-    private AStarNode initialState;
-    private AStarNode goalState;
+    private AbstractAStarNode initialState;
+    private AbstractAStarNode goalState;
     private IHeuristicFunction heuristicFunction;
 
     /**
@@ -19,7 +19,7 @@ public class AStarSearch {
      * @param initialState the state where the search begins
      * @param goalState the state where the search ends
      */
-    public AStarSearch(AStarNode initialState, AStarNode goalState, IHeuristicFunction heuristicFunction) {
+    public AStarSearch(AbstractAStarNode initialState, AbstractAStarNode goalState, IHeuristicFunction heuristicFunction) {
         this.initialState = initialState;
         this.goalState = goalState;
         this.heuristicFunction = heuristicFunction;
@@ -30,27 +30,27 @@ public class AStarSearch {
      *
      * @return the goal node with its corresponding optimal path parent, or null if the goal state cannot be found
      */
-    public AStarNode search() throws Exception {
+    public AbstractAStarNode search() throws Exception {
 
-        HashSet<AStarNode> closedSet = new HashSet<>();
+        HashSet<AbstractAStarNode> closedSet = new HashSet<>();
 
-        PriorityQueue<AStarNode> openSet = new PriorityQueue<>(1, goalState);
+        PriorityQueue<AbstractAStarNode> openSet = new PriorityQueue<>(1, goalState);
         // Used to quickly determine if node with same state is in the open set and to retrieve that states best f
-        HashMap<AStarNode, Integer> openSetHash = new HashMap<>();
+        HashMap<AbstractAStarNode, Integer> openSetHash = new HashMap<>();
         initialState.setF(this.heuristicFunction.calculateHeuristic(this.initialState, this.goalState));
         openSet.add(initialState);
         openSetHash.put(initialState, initialState.getF());
 
         while(!openSet.isEmpty()) {
-            AStarNode currentState = openSet.poll();
+            AbstractAStarNode currentState = openSet.poll();
 
             if(currentState.equals(goalState))
                 return currentState;
 
             closedSet.add(currentState);
-            ArrayList<AStarNode> childrenStates = currentState.getSuccessors();
+            ArrayList<AbstractAStarNode> childrenStates = currentState.getSuccessors();
 
-            for(AStarNode childState: childrenStates) {
+            for(AbstractAStarNode childState: childrenStates) {
 
                 if(closedSet.contains(childState))
                     continue;
@@ -78,8 +78,8 @@ public class AStarSearch {
      * @param endPathNode the output from search()
      * @return an list of nodes ordered to represent the optimal path
      */
-    public ArrayList<AStarNode> getPath(AStarNode endPathNode) {
-        ArrayList<AStarNode> path = new ArrayList<>();
+    public ArrayList<AbstractAStarNode> getPath(AbstractAStarNode endPathNode) {
+        ArrayList<AbstractAStarNode> path = new ArrayList<>();
         path.add(endPathNode);
 
         while(endPathNode.getParent() != null) {

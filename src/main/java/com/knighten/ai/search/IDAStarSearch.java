@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class IDAStarSearch {
 
-    private AStarNode initialState;
-    private AStarNode goalState;
+    private AbstractAStarNode initialState;
+    private AbstractAStarNode goalState;
     private IHeuristicFunction heuristicFunction;
 
     /**
@@ -16,7 +16,7 @@ public class IDAStarSearch {
      * @param initialState the state where the search begins
      * @param goalState the state where the search ends
      */
-    public IDAStarSearch(AStarNode initialState, AStarNode goalState, IHeuristicFunction heuristicFunction) {
+    public IDAStarSearch(AbstractAStarNode initialState, AbstractAStarNode goalState, IHeuristicFunction heuristicFunction) {
         this.initialState = initialState;
         this.goalState = goalState;
         this.heuristicFunction = heuristicFunction;
@@ -27,10 +27,10 @@ public class IDAStarSearch {
      *
      * @return the goal node with its corresponding optimal path parent, or null if the goal state cannot be found
      */
-    public AStarNode search() throws Exception {
+    public AbstractAStarNode search() throws Exception {
 
         int currentFBound = this.heuristicFunction.calculateHeuristic(initialState, goalState);
-        ArrayList<AStarNode> path = new ArrayList<>();
+        ArrayList<AbstractAStarNode> path = new ArrayList<>();
         path.add(0, initialState);
 
         int smallestNewFBound;
@@ -56,9 +56,9 @@ public class IDAStarSearch {
      * @param currentFBound the max f boundary for current iteration
      * @return the smallest f value in the  iteration that was greater than the fBoundary for the iteration
      */
-    private int recur_search(ArrayList<AStarNode> path, int graphCost, int currentFBound) throws Exception {
+    private int recur_search(ArrayList<AbstractAStarNode> path, int graphCost, int currentFBound) throws Exception {
 
-        AStarNode currentNode = path.get(path.size()-1);
+        AbstractAStarNode currentNode = path.get(path.size()-1);
         currentNode.setH(this.heuristicFunction.calculateHeuristic(currentNode, this.goalState));
         currentNode.setG(graphCost);
         currentNode.setF(graphCost + currentNode.getH());
@@ -72,10 +72,10 @@ public class IDAStarSearch {
             return 0;
 
         int minFFound = Integer.MAX_VALUE;
-        ArrayList<AStarNode> children = currentNode.getSuccessors();
+        ArrayList<AbstractAStarNode> children = currentNode.getSuccessors();
 
         // Expand on each child node
-        for(AStarNode child: children) {
+        for(AbstractAStarNode child: children) {
             // Verify child not already on path
             if(!path.contains(child)) {
                 path.add(child);
@@ -102,8 +102,8 @@ public class IDAStarSearch {
      * @param endPathNode the output from search()
      * @return an list of nodes ordered to represent the optimal path
      */
-    public ArrayList<AStarNode> getPath(AStarNode endPathNode) {
-        ArrayList<AStarNode> path = new ArrayList<>();
+    public ArrayList<AbstractAStarNode> getPath(AbstractAStarNode endPathNode) {
+        ArrayList<AbstractAStarNode> path = new ArrayList<>();
         path.add(endPathNode);
 
         while(endPathNode.getParent() != null) {
