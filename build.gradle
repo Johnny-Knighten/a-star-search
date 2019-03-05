@@ -1,28 +1,16 @@
 plugins {
-    id 'org.jetbrains.intellij' version '0.3.1'
+    id 'java'
 }
 
-group 'knighten'
-version '1.0-SNAPSHOT'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+version = '1.0.0'
 
-apply plugin: 'java'
+description = "A* and IDA* search implemented in Java.."
 
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-}
+repositories { mavenCentral() }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    testCompile "org.mockito:mockito-core:1.+"
-}
-
-intellij {
-    version '2017.3.4'
-}
-patchPluginXml {
-    changeNotes """
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>"""
+    testCompile 'junit:junit:4.12'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.1.0'
 }
