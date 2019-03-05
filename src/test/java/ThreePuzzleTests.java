@@ -164,34 +164,6 @@ public class ThreePuzzleTests {
         Assert.assertTrue(successors.contains(successor2));
     }
 
-
-    /////////////////////////
-    // Tests - Calculate H //
-    /////////////////////////
-
-    @Test
-    public void calcHForMatchWithGoalNode() throws Exception {
-        ThreePuzzle board = new ThreePuzzle(puzzleBoardSolution);
-        ThreePuzzle goalBoard = new ThreePuzzle(puzzleBoardSolution);
-        Assert.assertEquals(0, board.calcH(goalBoard));
-    }
-
-    @Test
-    public void calcHForNonGoalNodeBestCase() throws Exception {
-        ThreePuzzle board = new ThreePuzzle(new int[]{1,0,2,3});
-        ThreePuzzle goalBoard = new ThreePuzzle(puzzleBoardSolution);
-
-        Assert.assertEquals(1, board.calcH(goalBoard));
-    }
-
-    @Test
-    public void calcHForNonGoalNodeWorstCase() throws Exception {
-        ThreePuzzle board = new ThreePuzzle(new int[]{3,2,1,0});
-        ThreePuzzle goalBoard = new ThreePuzzle(puzzleBoardSolution);
-
-        Assert.assertEquals(6, board.calcH(goalBoard));
-    }
-
     ///////////////////
     // Tests -  Hash //
     ///////////////////

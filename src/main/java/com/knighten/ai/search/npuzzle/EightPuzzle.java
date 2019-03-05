@@ -160,6 +160,14 @@ public class EightPuzzle extends AStarNode<int[]> {
     }
 
     /**
+     * Converts a 1-dimensional index to a 2-dimensional index in a 3x3 grid.
+     *
+     * @param flatIndex the index in one dimension
+     * @return array representing the two dimensional index
+     */
+    private int[] oneDimIndToTwoInd(int flatIndex) {return new int[]{flatIndex % 3, (int) Math.floor(flatIndex / 3)};}
+
+    /**
      * Converts the puzzle into its string representation as a 3x3 grid. An * is used instead of 0 to represent
      * the empty space.
      *
@@ -180,13 +188,7 @@ public class EightPuzzle extends AStarNode<int[]> {
         return stringBuilder.toString();
     }
 
-    /**
-     * Converts a 1-dimensional index to a 2-dimensional index in a 3x3 grid.
-     *
-     * @param flatIndex the index in one dimension
-     * @return array representing the two dimensional index
-     */
-    private int[] oneDimIndToTwoInd(int flatIndex) {return new int[]{flatIndex % 3, (int) Math.floor(flatIndex / 3)};}
+
 
 
     // Usage Example
