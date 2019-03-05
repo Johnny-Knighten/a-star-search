@@ -1,5 +1,5 @@
 import com.knighten.ai.search.AStarNode;
-import com.knighten.ai.search.ThreePuzzle;
+import com.knighten.ai.search.npuzzle.ThreePuzzle;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;

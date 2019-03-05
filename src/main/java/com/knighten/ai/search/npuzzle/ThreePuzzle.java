@@ -1,4 +1,7 @@
-package com.knighten.ai.search;
+package com.knighten.ai.search.npuzzle;
+
+import com.knighten.ai.search.AStarNode;
+import com.knighten.ai.search.AStarSearch;
 
 import java.util.ArrayList;
 import java.util.Arrays;
