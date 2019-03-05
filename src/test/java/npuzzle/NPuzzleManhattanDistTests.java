@@ -1,3 +1,5 @@
+package npuzzle;
+
 import com.knighten.ai.search.AbstractAStarNode;
 import com.knighten.ai.search.npuzzle.EightPuzzle;
 import com.knighten.ai.search.npuzzle.NPuzzleManhattanDist;

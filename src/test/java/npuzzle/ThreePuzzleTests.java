@@ -1,3 +1,5 @@
+package npuzzle;
+
 import com.knighten.ai.search.AbstractAStarNode;
 import com.knighten.ai.search.npuzzle.ThreePuzzle;
 import org.junit.Assert;
@@ -81,33 +83,6 @@ public class ThreePuzzleTests {
         Assert.assertEquals(mockParentNode, newPuzzle.getParent());
     }
 
-
-    ////////////////////
-    // Tests - Equals //
-    ////////////////////
-
-    @Test
-    public void checkEqualityWithSameBoard() throws Exception {
-        ThreePuzzle newPuzzle = new ThreePuzzle(puzzleBoardSolution);
-
-        Assert.assertTrue(newPuzzle.equals(mockGoalNode));
-    }
-
-    @Test
-    public void checkEqualityWithDifferentBoards() throws Exception {
-        ThreePuzzle newPuzzle = new ThreePuzzle(puzzleBoardSolution);
-
-        Assert.assertFalse(newPuzzle.equals(mockNonEqualNode));
-    }
-
-    @Test
-    public void checkEqualityWithWrongClassNode() throws Exception {
-        ThreePuzzle newPuzzle = new ThreePuzzle(puzzleBoardSolution);
-
-        Assert.assertFalse(newPuzzle.equals(mockWrongClass));
-    }
-
-
     /////////////////////////////////////
     // Tests - Successor Node Creation //
     /////////////////////////////////////
@@ -164,28 +139,5 @@ public class ThreePuzzleTests {
         Assert.assertTrue(successors.contains(successor2));
     }
 
-    ///////////////////
-    // Tests -  Hash //
-    ///////////////////
-
-    @Test
-    public void ensureHashCollidesWithSameBoard() throws Exception {
-        ThreePuzzle board = new ThreePuzzle(puzzleBoardSolution);
-        ThreePuzzle sameBoard = new ThreePuzzle(puzzleBoardSolution);
-
-        Assert.assertEquals(board.hashCode(), sameBoard.hashCode());
-    }
-
-
-    ///////////////////////
-    // Tests -  toString //
-    ///////////////////////
-
-    @Test
-    public void ensureProperToString() throws Exception {
-        ThreePuzzle newPuzzle = new ThreePuzzle(puzzleBoardSolution);
-
-        Assert.assertEquals("* 1\n2 3\n" , newPuzzle.toString());
-    }
 
 }

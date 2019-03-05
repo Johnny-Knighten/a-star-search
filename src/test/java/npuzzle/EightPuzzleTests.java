@@ -1,3 +1,5 @@
+package npuzzle;
+
 import com.knighten.ai.search.AbstractAStarNode;
 import com.knighten.ai.search.npuzzle.EightPuzzle;
 import org.junit.Assert;
@@ -80,33 +82,6 @@ public class EightPuzzleTests {
         Assert.assertArrayEquals(puzzleBoardSolution, newPuzzle.getState());
         Assert.assertEquals(mockParentNode, newPuzzle.getParent());
     }
-
-
-    ////////////////////
-    // Tests - Equals //
-    ////////////////////
-
-    @Test
-    public void checkEqualityWithSameBoard() throws Exception {
-        EightPuzzle newPuzzle = new EightPuzzle(puzzleBoardSolution);
-
-        Assert.assertTrue(newPuzzle.equals(mockGoalNode));
-    }
-
-    @Test
-    public void checkEqualityWithDifferentBoards() throws Exception {
-        EightPuzzle newPuzzle = new EightPuzzle(puzzleBoardSolution);
-
-        Assert.assertFalse(newPuzzle.equals(mockNonEqualNode));
-    }
-
-    @Test
-    public void checkEqualityWithWrongClassNode() throws Exception {
-        EightPuzzle newPuzzle = new EightPuzzle(puzzleBoardSolution);
-
-        Assert.assertFalse(newPuzzle.equals(mockWrongClass));
-    }
-
 
     /////////////////////////////////////
     // Tests - Successor Node Creation //
@@ -239,31 +214,6 @@ public class EightPuzzleTests {
         Assert.assertEquals(2, successors.size());
         Assert.assertTrue(successors.contains(successor1));
         Assert.assertTrue(successors.contains(successor2));
-    }
-
-
-    ///////////////////
-    // Tests -  Hash //
-    ///////////////////
-
-    @Test
-    public void ensureHashCollidesWithSameBoard() throws Exception {
-        EightPuzzle board = new EightPuzzle(puzzleBoardSolution);
-        EightPuzzle sameBoard = new EightPuzzle(puzzleBoardSolution);
-
-        Assert.assertEquals(board.hashCode(), sameBoard.hashCode());
-    }
-
-
-    ///////////////////////
-    // Tests -  toString //
-    ///////////////////////
-
-    @Test
-    public void ensureProperToString() throws Exception {
-        EightPuzzle newPuzzle = new EightPuzzle(puzzleBoardSolution);
-
-        Assert.assertEquals("* 1 2\n3 4 5\n6 7 8\n" , newPuzzle.toString());
     }
 
 }

@@ -1,3 +1,5 @@
+package baseclasses;
+
 import com.knighten.ai.search.AbstractAStarNode;
 import org.junit.Assert;
 import org.junit.Before;
