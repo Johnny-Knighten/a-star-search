@@ -18,6 +18,13 @@ public class NPuzzleManhattanDist implements IHeuristicFunction {
      */
     @Override
     public int calculateHeuristic(AStarNode searchNode, AStarNode goalNode) {
+
+        if(searchNode == null)
+            throw new IllegalArgumentException("Search Node Cannot Be Null");
+
+        if(goalNode == null)
+            throw new IllegalArgumentException("Goal Node Cannot Be Null");
+
         int[] goalBoard = (int[]) goalNode.getState();
         int[] currentBoard = (int[]) searchNode.getState();
         int flatBoardLength = goalBoard.length;

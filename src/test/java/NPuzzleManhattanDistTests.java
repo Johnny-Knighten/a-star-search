@@ -45,6 +45,23 @@ public class NPuzzleManhattanDistTests {
         searchEightPuzzleTwentyH = new EightPuzzle(new int[]{8, 7, 6, 5, 4, 3, 2, 1, 0});
     }
 
+    ////////////////////////
+    // Parameter Checking //
+    ////////////////////////
+
+    @Test(expected = IllegalArgumentException.class)
+    public void calculateHeuristicSearchNodeNull() {
+        NPuzzleManhattanDist testObject = new NPuzzleManhattanDist();
+        testObject.calculateHeuristic(null, mockGoalNode);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void calculateHeuristicGoalNodeNull() {
+        NPuzzleManhattanDist testObject = new NPuzzleManhattanDist();
+        testObject.calculateHeuristic(mockSearchNode, null);
+    }
+
+    
     ////////////////////
     // Method Testing //
     ////////////////////
