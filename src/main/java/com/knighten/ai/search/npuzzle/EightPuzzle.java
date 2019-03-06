@@ -94,8 +94,8 @@ public class EightPuzzle extends AbstractNPuzzle {
     // Usage Example
     public static void main(String[] args) {
 
-        int[] initStateArray = {0, 8, 7, 6, 5, 4, 3, 2, 1};
-        int[] goalStateArray = {1, 2, 3, 4, 5, 6, 7, 8, 0};
+        int[] initStateArray = {7, 2, 4, 5, 0, 6, 8, 3, 1};
+        int[] goalStateArray = {0, 1, 2, 3, 4, 5, 6, 7, 8};
 
         EightPuzzle initialState = new EightPuzzle(initStateArray);
         EightPuzzle goalState = new EightPuzzle(goalStateArray);

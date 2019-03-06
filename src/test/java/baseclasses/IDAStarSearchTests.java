@@ -202,7 +202,7 @@ public class IDAStarSearchTests {
     @Test
     public void oneMoveNeeded8Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(standardGoalBoard8Puzz);
-        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard8Puzz, oneMoveStandardInitBoard8Puzz, heuristic);
+        IDAStarSearch searcher = new IDAStarSearch(oneMoveStandardInitBoard8Puzz, standardGoalBoard8Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
@@ -212,7 +212,7 @@ public class IDAStarSearchTests {
     @Test
     public void twoMovesNeeded8Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(standardGoalBoard8Puzz);
-        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard8Puzz, twoMoveStandardInitBoard8Puzz, heuristic);
+        IDAStarSearch searcher = new IDAStarSearch(twoMoveStandardInitBoard8Puzz, standardGoalBoard8Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
@@ -222,7 +222,7 @@ public class IDAStarSearchTests {
     @Test
     public void sevenMovesNeeded8Puzz() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(sevenMoveGoalBoard8Puzz);
-        IDAStarSearch searcher = new IDAStarSearch(sevenMoveGoalBoard8Puzz, sevenMoveInitBoard8Puzz, heuristic);
+        IDAStarSearch searcher = new IDAStarSearch(sevenMoveInitBoard8Puzz, sevenMoveGoalBoard8Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
@@ -232,19 +232,17 @@ public class IDAStarSearchTests {
     @Test
     public void twentyTwoMove8Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(twentyTwoMoveGoalBoard8Puzz);
-        IDAStarSearch searcher = new IDAStarSearch(twentyTwoMoveGoalBoard8Puzz, twentyTwoMoveInitBoard8Puzz, heuristic);
+        IDAStarSearch searcher = new IDAStarSearch(twentyTwoMoveInitBoard8Puzz, twentyTwoMoveGoalBoard8Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
         Assert.assertEquals(23, path.size());
     }
 
-    // IDA* Takes To Long For This T0 Be A  Reasonable Test - See The ThreePuzzle Board Version\
-    // TODO - Investigate Why Moving goalNode Into NPuzzleManhattanDist Caused Major Slow Down
-    /*@Test
+    @Test
     public void twentySixMove8Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(twentySixMoveGoalBoard8Puzz);
-        IDAStarSearch searcher = new IDAStarSearch(twentySixMoveGoalBoard8Puzz, twentySixMoveInitBoard8Puzz, heuristic);
+        IDAStarSearch searcher = new IDAStarSearch(twentySixMoveInitBoard8Puzz, twentySixMoveGoalBoard8Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
@@ -254,14 +252,15 @@ public class IDAStarSearchTests {
     @Test
     public void thirtyOneMove8Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(thirtyOneMoveGoalBoard8Puzz);
-        IDAStarSearch searcher = new IDAStarSearch(thirtyOneMoveGoalBoard8Puzz, thirtyOneMoveInitBoard8Puzz, heuristic);
+        IDAStarSearch searcher = new IDAStarSearch(thirtyOneMoveInitBoard8Puzz,thirtyOneMoveGoalBoard8Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
         Assert.assertEquals(32, path.size());
     }
 
-    *@Test
+    // IDA* Takes To Long For This T0 Be A  Reasonable Test - See The ThreePuzzle Board Version\
+    /*@Test
     public void noSolution8Puzzle() {
         IDAStarSearch searcher = new IDAStarSearch(noSolutionGoalBoard, noSolutionInitBoard);
         AbstractAStarNode solution = searcher.search();
@@ -287,7 +286,7 @@ public class IDAStarSearchTests {
     @Test
     public void oneMoveNeeded3Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(standardGoalBoard3Puzz);
-        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard3Puzz, oneMoveInitBoard3Puzz, heuristic);
+        IDAStarSearch searcher = new IDAStarSearch(oneMoveInitBoard3Puzz, standardGoalBoard3Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
@@ -297,7 +296,7 @@ public class IDAStarSearchTests {
     @Test
     public void sevenMovesNeeded3Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(standardGoalBoard3Puzz);
-        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard3Puzz, sevenMoveInitBoard3Puzz, heuristic);
+        IDAStarSearch searcher = new IDAStarSearch(sevenMoveInitBoard3Puzz, standardGoalBoard3Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
@@ -307,7 +306,7 @@ public class IDAStarSearchTests {
     @Test
     public void noSolution3Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(standardGoalBoard3Puzz);
-        IDAStarSearch searcher = new IDAStarSearch(standardGoalBoard3Puzz, noSolutionInitBoard3Puzz, heuristic);
+        IDAStarSearch searcher = new IDAStarSearch(noSolutionInitBoard3Puzz, standardGoalBoard3Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
 
         Assert.assertNull(solution);

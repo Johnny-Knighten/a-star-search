@@ -194,7 +194,7 @@ public class AStarSearchTests {
     @Test
     public void oneMoveNeeded8Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(standardGoalBoard8Puzz);
-        AStarSearch searcher = new AStarSearch(standardGoalBoard8Puzz, oneMoveStandardInitBoard8Puzz, heuristic);
+        AStarSearch searcher = new AStarSearch(oneMoveStandardInitBoard8Puzz, standardGoalBoard8Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
@@ -204,7 +204,7 @@ public class AStarSearchTests {
     @Test
     public void twoMovesNeeded8Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(standardGoalBoard8Puzz);
-        AStarSearch searcher = new AStarSearch(standardGoalBoard8Puzz, twoMoveStandardInitBoard8Puzz, heuristic);
+        AStarSearch searcher = new AStarSearch(twoMoveStandardInitBoard8Puzz, standardGoalBoard8Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
@@ -214,7 +214,7 @@ public class AStarSearchTests {
     @Test
     public void sevenMovesNeeded8Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(sevenMoveGoalBoard8Puzz);
-        AStarSearch searcher = new AStarSearch(sevenMoveGoalBoard8Puzz, sevenMoveInitBoard8Puzz, heuristic);
+        AStarSearch searcher = new AStarSearch(sevenMoveInitBoard8Puzz, sevenMoveGoalBoard8Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
@@ -224,7 +224,7 @@ public class AStarSearchTests {
     @Test
     public void twentyTwoMove8Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(twentyTwoMoveGoalBoard8Puzz);
-        AStarSearch searcher = new AStarSearch(twentyTwoMoveGoalBoard8Puzz, twentyTwoMoveInitBoard8Puzz, heuristic);
+        AStarSearch searcher = new AStarSearch(twentyTwoMoveInitBoard8Puzz, twentyTwoMoveGoalBoard8Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
@@ -234,7 +234,7 @@ public class AStarSearchTests {
     @Test
     public void twentySixMove8Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(twentySixMoveGoalBoard8Puzz);
-        AStarSearch searcher = new AStarSearch(twentySixMoveGoalBoard8Puzz, twentySixMoveInitBoard8Puzz, heuristic);
+        AStarSearch searcher = new AStarSearch(twentySixMoveInitBoard8Puzz, twentySixMoveGoalBoard8Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
@@ -244,7 +244,7 @@ public class AStarSearchTests {
     @Test
     public void thirtyOneMove8Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(thirtyOneMoveGoalBoard8Puzz);
-        AStarSearch searcher = new AStarSearch(thirtyOneMoveGoalBoard8Puzz, thirtyOneMoveInitBoard8Puzz, heuristic);
+        AStarSearch searcher = new AStarSearch(thirtyOneMoveInitBoard8Puzz, thirtyOneMoveGoalBoard8Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
@@ -254,7 +254,7 @@ public class AStarSearchTests {
     @Test
     public void noSolution8Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(noSolutionGoalBoard8Puzz);
-        AStarSearch searcher = new AStarSearch(noSolutionGoalBoard8Puzz, noSolutionInitBoard8Puzz, heuristic);
+        AStarSearch searcher = new AStarSearch(noSolutionInitBoard8Puzz, noSolutionGoalBoard8Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
 
         Assert.assertNull(solution);
@@ -277,7 +277,7 @@ public class AStarSearchTests {
     @Test
     public void oneMoveNeeded3Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(standardGoalBoard3Puzz);
-        AStarSearch searcher = new AStarSearch(standardGoalBoard3Puzz, oneMoveInitBoard3Puzz, heuristic);
+        AStarSearch searcher = new AStarSearch(oneMoveInitBoard3Puzz, standardGoalBoard3Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
@@ -287,7 +287,7 @@ public class AStarSearchTests {
     @Test
     public void sevenMovesNeeded3Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(standardGoalBoard3Puzz);
-        AStarSearch searcher = new AStarSearch(standardGoalBoard3Puzz, sevenMoveInitBoard3Puzz, heuristic);
+        AStarSearch searcher = new AStarSearch(sevenMoveInitBoard3Puzz, standardGoalBoard3Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
@@ -297,7 +297,7 @@ public class AStarSearchTests {
     @Test
     public void noSolution3Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(standardGoalBoard3Puzz);
-        AStarSearch searcher = new AStarSearch(standardGoalBoard3Puzz, noSolutionInitBoard3Puzz, heuristic);
+        AStarSearch searcher = new AStarSearch(noSolutionInitBoard3Puzz, standardGoalBoard3Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
 
         Assert.assertNull(solution);
