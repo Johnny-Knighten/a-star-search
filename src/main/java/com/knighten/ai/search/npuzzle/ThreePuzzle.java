@@ -20,19 +20,22 @@ public class ThreePuzzle extends AbstractNPuzzle {
      *
      * @param puzzleBoard array of ints representing the puzzle board
      */
-    public ThreePuzzle(int[] puzzleBoard) throws Exception {
+    public ThreePuzzle(int[] puzzleBoard) {
+
+        if(puzzleBoard == null)
+            throw new IllegalArgumentException("3Puzzle Board's Cannot Be Null");
 
         if(puzzleBoard.length != 4)
-            throw new Exception("Puzzle board most have 4 spaces(Array length 4).");
+            throw new IllegalArgumentException("3Puzzle Board's Must Have 4 Spaces(Array Length of 4)");
 
         this.setState(puzzleBoard);
 
-        for(int currentSpace=0; currentSpace<puzzleBoard.length; currentSpace++)
+        for(int currentSpace = 0; currentSpace < puzzleBoard.length; currentSpace++)
             if(puzzleBoard[currentSpace] == 0)
                 this.setEmptySpaceLocation(currentSpace);
 
         if(this.getEmptySpaceLocation() == -1)
-            throw new Exception("Puzzle board most contain an empty space(0 must be in the array).");
+            throw new IllegalArgumentException("All NPuzzle Boards Most Contain an Empty Space(0 Must Be In The Array)");
     }
 
     /**
@@ -42,7 +45,7 @@ public class ThreePuzzle extends AbstractNPuzzle {
      * @param puzzleBoard  array of ints representing the puzzle board
      * @param parentPuzzle the parent node of the current
      */
-    public ThreePuzzle(int[] puzzleBoard, ThreePuzzle parentPuzzle) throws Exception {
+    public ThreePuzzle(int[] puzzleBoard, ThreePuzzle parentPuzzle) {
         this(puzzleBoard);
         this.setParent(parentPuzzle);
     }
@@ -54,7 +57,7 @@ public class ThreePuzzle extends AbstractNPuzzle {
      * @return array list of successor states.
      */
     @Override
-    public ArrayList<AbstractAStarNode> getSuccessors() throws Exception {
+    public ArrayList<AbstractAStarNode> getSuccessors() {
         ArrayList<Integer> possibleNextMoves = new ArrayList<>();
 
         // Check If Empty Space Is In Top Left Or Bottom Right
