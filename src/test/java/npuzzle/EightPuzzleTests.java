@@ -14,7 +14,6 @@ public class EightPuzzleTests {
     private int[] puzzleBoardSolution;
     private int[] puzzleBoardNoZero;
     private int[] puzzleBoardInvalidLength;
-    private int[] puzzleBoardReversedGoal;
     private int[] middlEmpty;
     private int[] middleLeftEmpty;
     private int[] middleRightEmpty;
@@ -25,30 +24,15 @@ public class EightPuzzleTests {
     private int[] bottomLeftEmpty;
     private int[] bottomRightEmpty;
     private EightPuzzle mockParentNode;
-    private EightPuzzle mockGoalNode;
-    private EightPuzzle mockNonEqualNode;
-
-
-
+    
     @Before
-
     public void setup() {
 
         puzzleBoardSolution = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8};
         puzzleBoardNoZero = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 10};
         puzzleBoardInvalidLength = new int[]{0};
-        puzzleBoardReversedGoal = new int[]{8, 7, 6, 5, 4, 3, 2, 1, 0};
 
         mockParentNode = Mockito.mock(EightPuzzle.class);
-
-        mockGoalNode = Mockito.mock(EightPuzzle.class);
-        Mockito.when(mockGoalNode.getState())
-                .thenReturn(puzzleBoardSolution);
-
-        mockNonEqualNode = Mockito.mock(EightPuzzle.class);
-        Mockito.when(mockNonEqualNode.getState())
-                .thenReturn(puzzleBoardReversedGoal);
-
 
         middlEmpty = new int[]{1, 2, 3, 4, 0, 5, 6, 7, 8};
         middleLeftEmpty = new int[]{1, 2, 3, 0, 4, 5, 6, 7, 8};
