@@ -55,7 +55,7 @@ public class IDAStarSearchTests {
 
 
     @Before
-    public void setup() throws Exception {
+    public void setup()  {
 
         standardGoal8Puzz = new int[]{0,1,2,3,4,5,6,7,8};
         standardGoalBoard8Puzz = new EightPuzzle(standardGoal8Puzz);

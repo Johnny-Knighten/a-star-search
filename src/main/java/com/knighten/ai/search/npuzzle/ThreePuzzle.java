@@ -85,7 +85,7 @@ public class ThreePuzzle extends AbstractNPuzzle {
     }
 
     // Usage Example
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
         int[] initStateArray = {0,3,2,1};
         int[] goalStateArray = {1,2,3,0};

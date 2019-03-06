@@ -30,11 +30,11 @@ public class AStarSearch {
      *
      * @return the goal node with its corresponding optimal path parent, or null if the goal state cannot be found
      */
-    public AbstractAStarNode search() throws Exception {
+    public AbstractAStarNode search() {
 
         HashSet<AbstractAStarNode> closedSet = new HashSet<>();
 
-        PriorityQueue<AbstractAStarNode> openSet = new PriorityQueue<>(1, goalState);
+        PriorityQueue<AbstractAStarNode> openSet = new PriorityQueue<AbstractAStarNode>(1, goalState);
         // Used to quickly determine if node with same state is in the open set and to retrieve that states best f
         HashMap<AbstractAStarNode, Integer> openSetHash = new HashMap<>();
         initialState.setF(this.heuristicFunction.calculateHeuristic(this.initialState, this.goalState));

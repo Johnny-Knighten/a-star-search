@@ -24,7 +24,7 @@ public class EightPuzzleTests {
     private int[] bottomLeftEmpty;
     private int[] bottomRightEmpty;
     private EightPuzzle mockParentNode;
-    
+
     @Before
     public void setup() {
 

@@ -27,7 +27,7 @@ public class IDAStarSearch {
      *
      * @return the goal node with its corresponding optimal path parent, or null if the goal state cannot be found
      */
-    public AbstractAStarNode search() throws Exception {
+    public AbstractAStarNode search() {
 
         int currentFBound = this.heuristicFunction.calculateHeuristic(initialState, goalState);
         ArrayList<AbstractAStarNode> path = new ArrayList<>();
@@ -56,7 +56,7 @@ public class IDAStarSearch {
      * @param currentFBound the max f boundary for current iteration
      * @return the smallest f value in the  iteration that was greater than the fBoundary for the iteration
      */
-    private int recur_search(ArrayList<AbstractAStarNode> path, int graphCost, int currentFBound) throws Exception {
+    private int recur_search(ArrayList<AbstractAStarNode> path, int graphCost, int currentFBound) {
 
         AbstractAStarNode currentNode = path.get(path.size()-1);
         currentNode.setH(this.heuristicFunction.calculateHeuristic(currentNode, this.goalState));

@@ -129,7 +129,7 @@ public abstract class AbstractAStarNode<T> implements Comparator<AbstractAStarNo
      *
      * @return list of successor nodes
      */
-    public abstract ArrayList<AbstractAStarNode> getSuccessors() throws Exception;
+    public abstract ArrayList<AbstractAStarNode> getSuccessors();
 
     /**
      * Returns the distance from the node to its parent.
