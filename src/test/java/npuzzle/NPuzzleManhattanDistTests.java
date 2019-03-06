@@ -83,74 +83,74 @@ public class NPuzzleManhattanDistTests {
     @Test
     public void calculateHeuristicThreePuzzleHZero() {
         NPuzzleManhattanDist testObject = new NPuzzleManhattanDist(goalThreePuzzle);
-        int result = testObject.calculateHeuristic(goalThreePuzzle);
+        double result = testObject.calculateHeuristic(goalThreePuzzle);
 
-        Assert.assertEquals(0, result);
+        Assert.assertEquals(0, result, .00001);
     }
 
     @Test
     public void calculateHeuristicThreePuzzleHOne() {
         NPuzzleManhattanDist testObject = new NPuzzleManhattanDist(goalThreePuzzle);
-        int result = testObject.calculateHeuristic(searchThreePuzzleOneH);
+        double result = testObject.calculateHeuristic(searchThreePuzzleOneH);
 
-        Assert.assertEquals(1, result);
+        Assert.assertEquals(1, result, .00001);
     }
 
     @Test
     public void calculateHeuristicThreePuzzleHSix() {
         NPuzzleManhattanDist testObject = new NPuzzleManhattanDist(goalThreePuzzle);
-        int result = testObject.calculateHeuristic(searchThreePuzzleSixH);
+        double result = testObject.calculateHeuristic(searchThreePuzzleSixH);
 
-        Assert.assertEquals(6, result);
+        Assert.assertEquals(6, result, .00001);
     }
 
 
     @Test
     public void calculateHeuristicEightPuzzleHZero() {
         NPuzzleManhattanDist testObject = new NPuzzleManhattanDist(goalEightPuzzle);
-        int result = testObject.calculateHeuristic(goalEightPuzzle);
+        double result = testObject.calculateHeuristic(goalEightPuzzle);
 
-        Assert.assertEquals(0, result);
+        Assert.assertEquals(0, result, .00001);
     }
 
     @Test
     public void calculateHeuristicEightPuzzleHOne() {
         NPuzzleManhattanDist testObject = new NPuzzleManhattanDist(goalEightPuzzle);
-        int result = testObject.calculateHeuristic(searchEightPuzzleOneH);
+        double result = testObject.calculateHeuristic(searchEightPuzzleOneH);
 
-        Assert.assertEquals(1, result);
+        Assert.assertEquals(1, result, .00001);
     }
 
     @Test
     public void calculateHeuristicEightPuzzleHTwo() {
         NPuzzleManhattanDist testObject = new NPuzzleManhattanDist(goalEightPuzzle);
-        int result = testObject.calculateHeuristic(searchEightPuzzleTwoH);
+        double result = testObject.calculateHeuristic(searchEightPuzzleTwoH);
 
-        Assert.assertEquals(2, result);
+        Assert.assertEquals(2, result, .00001);
     }
 
     @Test
     public void calculateHeuristicEightPuzzleHSeven() {
         NPuzzleManhattanDist testObject = new NPuzzleManhattanDist(goalEightPuzzle);
-        int result = testObject.calculateHeuristic(searchEightPuzzleSevenH);
+        double result = testObject.calculateHeuristic(searchEightPuzzleSevenH);
 
-        Assert.assertEquals(7, result);
+        Assert.assertEquals(7, result, .00001);
     }
 
     @Test
     public void calculateHeuristicEightPuzzleHThirteen() {
         NPuzzleManhattanDist testObject = new NPuzzleManhattanDist(goalEightPuzzle);
-        int result = testObject.calculateHeuristic(searchEightPuzzleThirteenH);
+        double result = testObject.calculateHeuristic(searchEightPuzzleThirteenH);
 
-        Assert.assertEquals(13, result);
+        Assert.assertEquals(13, result, .00001);
     }
 
     @Test
     public void calculateHeuristicEightPuzzleHTwenty() {
         NPuzzleManhattanDist testObject = new NPuzzleManhattanDist(goalEightPuzzle);
-        int result = testObject.calculateHeuristic(searchEightPuzzleTwentyH);
+        double result = testObject.calculateHeuristic(searchEightPuzzleTwentyH);
 
-        Assert.assertEquals(20, result);
+        Assert.assertEquals(20, result, .00001);
     }
 
 }

@@ -30,7 +30,7 @@ public class NPuzzleManhattanDist implements IHeuristicFunction {
      * @return returns the calculated heuristic(h()) score
      */
     @Override
-    public int calculateHeuristic(AbstractAStarNode searchNode) {
+    public double calculateHeuristic(AbstractAStarNode searchNode) {
 
         if(searchNode == null)
             throw new IllegalArgumentException("Search Node Cannot Be Null");

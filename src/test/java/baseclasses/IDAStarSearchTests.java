@@ -14,6 +14,7 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -67,19 +68,19 @@ public class IDAStarSearchTests {
         mockGoal = Mockito.mock(AbstractAStarNode.class);
 
         mockInitial = Mockito.mock(AbstractAStarNode.class);
-        Mockito.when(mockInitial.getG()).thenReturn(0);
+        Mockito.when(mockInitial.getG()).thenReturn(0.0);
 
         mockInitialNoSuccessors = Mockito.mock(AbstractAStarNode.class);
-        Mockito.when(mockInitialNoSuccessors.getG()).thenReturn(0);
+        Mockito.when(mockInitialNoSuccessors.getG()).thenReturn(0.0);
 
         mockHeuristic = Mockito.mock(IHeuristicFunction.class);
 
         successor1 = Mockito.mock(AbstractAStarNode.class);
-        Mockito.when(successor1.distFromParent()).thenReturn(1);
+        Mockito.when(successor1.distFromParent()).thenReturn(1.0);
         Mockito.when(successor1.getParent()).thenReturn(mockInitial);
 
         successor2 = Mockito.mock(AbstractAStarNode.class);
-        Mockito.when(successor2.distFromParent()).thenReturn(1);
+        Mockito.when(successor2.distFromParent()).thenReturn(1.0);
         Mockito.when(successor2.getParent()).thenReturn(mockInitial);
 
         List<AbstractAStarNode> listOfMocks = new ArrayList<>();
@@ -102,10 +103,10 @@ public class IDAStarSearchTests {
         verify(mockHeuristic, times(2)).calculateHeuristic(mockGoal);
 
         // Set H, G, and F
-        verify(mockGoal, times(1)).setH(anyInt());
+        verify(mockGoal, times(1)).setH(anyDouble());
         verify(mockHeuristic, times(2)).calculateHeuristic(mockGoal);
         verify(mockGoal, times(1)).setG(0);
-        verify(mockGoal, times(1)).setF(anyInt());
+        verify(mockGoal, times(1)).setF(anyDouble());
         verify(mockGoal, times(1)).getH();
 
         // Compare F To Bound
@@ -126,10 +127,10 @@ public class IDAStarSearchTests {
         verify(mockHeuristic, times(2)).calculateHeuristic(mockInitialNoSuccessors);
 
         // Set H, G, and F
-        verify(mockInitialNoSuccessors, times(1)).setH(anyInt());
+        verify(mockInitialNoSuccessors, times(1)).setH(anyDouble());
         verify(mockHeuristic, times(2)).calculateHeuristic(mockInitialNoSuccessors);
-        verify(mockInitialNoSuccessors, times(1)).setG(0);
-        verify(mockInitialNoSuccessors, times(1)).setF(anyInt());
+        verify(mockInitialNoSuccessors, times(1)).setG(0.0);
+        verify(mockInitialNoSuccessors, times(1)).setF(anyDouble());
         verify(mockInitialNoSuccessors, times(1)).getH();
 
         // Compare F To Bound
@@ -152,10 +153,10 @@ public class IDAStarSearchTests {
         verify(mockHeuristic, times(2)).calculateHeuristic(mockInitial);
 
         // Set H, G, and F
-        verify(mockInitial, times(1)).setH(anyInt());
+        verify(mockInitial, times(1)).setH(anyDouble());
         verify(mockHeuristic, times(2)).calculateHeuristic(mockInitial);
-        verify(mockInitial, times(1)).setG(0);
-        verify(mockInitial, times(1)).setF(anyInt());
+        verify(mockInitial, times(1)).setG(anyDouble());
+        verify(mockInitial, times(1)).setF(anyDouble());
         verify(mockInitial, times(1)).getH();
 
         // Compare F To Bound
@@ -168,18 +169,18 @@ public class IDAStarSearchTests {
         verify(mockInitial, times(2)).getG();
 
         verify(successor1, times(1)).distFromParent();
-        verify(successor1, times(1)).setG(anyInt());
+        verify(successor1, times(1)).setG(anyDouble());
         verify(mockHeuristic, times(1)).calculateHeuristic(successor1);
-        verify(successor1, times(1)).setH(anyInt());
+        verify(successor1, times(1)).setH(anyDouble());
         verify(successor1, times(1)).getH();
-        verify(successor1, times(1)).setF(anyInt());
+        verify(successor1, times(1)).setF(anyDouble());
 
         verify(successor2, times(1)).distFromParent();
-        verify(successor2, times(1)).setG(anyInt());
+        verify(successor2, times(1)).setG(anyDouble());
         verify(mockHeuristic, times(1)).calculateHeuristic(successor2);
-        verify(successor2, times(1)).setH(anyInt());
+        verify(successor2, times(1)).setH(anyDouble());
         verify(successor2, times(1)).getH();
-        verify(successor2, times(1)).setF(anyInt());
+        verify(successor2, times(1)).setF(anyDouble());
 
         // Algorithm Ends Due To No Goal Not Being Found
         Assert.assertNull(solution);

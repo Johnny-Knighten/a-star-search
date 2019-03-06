@@ -17,15 +17,15 @@ public class AbstractAStarNodeTests {
     public void setup() {
         testNodeWithF1 = Mockito.mock(AbstractAStarNode.class, Mockito.CALLS_REAL_METHODS);
         Mockito.when(testNodeWithF1.getF())
-                .thenReturn(1);
+                .thenReturn(1.0);
 
         testNodeWithFNeg1 = Mockito.mock(AbstractAStarNode.class, Mockito.CALLS_REAL_METHODS);
         Mockito.when(testNodeWithFNeg1.getF())
-                .thenReturn(-1);
+                .thenReturn(-1.0);
 
         testNodeWithF0 = Mockito.mock(AbstractAStarNode.class, Mockito.CALLS_REAL_METHODS);
         Mockito.when(testNodeWithF0.getF())
-                .thenReturn(0);
+                .thenReturn(0.0);
     }
 
     ///////////////////////////////////////////////////////

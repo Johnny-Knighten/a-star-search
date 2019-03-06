@@ -15,5 +15,5 @@ public interface IHeuristicFunction {
      * @param searchNode the node being compared to the goal
      * @return the heuristic score for the search node
      */
-    public int calculateHeuristic(AbstractAStarNode searchNode);
+    public double calculateHeuristic(AbstractAStarNode searchNode);
 }

@@ -45,7 +45,7 @@ public abstract class AbstractNPuzzle extends AbstractAStarNode<int[]> {
      * @return distance from parent to node - always 1
      */
     @Override
-    public int distFromParent() {return 1;}
+    public double distFromParent() {return 1;}
 
     /**
      * Returns the hash code for the puzzle board. Only compares state, so a AbstractNPuzzle's with the same board

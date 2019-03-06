@@ -12,7 +12,7 @@ public class NavigationManhattanDist implements IHeuristicFunction {
     }
 
     @Override
-    public int calculateHeuristic(AbstractAStarNode searchNode) {
+    public double calculateHeuristic(AbstractAStarNode searchNode) {
         int diffOfCols =  Math.abs(this.goalNode.getState()[0] - ((Maze) searchNode).getState()[0]);
         int diffOfRows = Math.abs(this.goalNode.getState()[1] - ((Maze) searchNode).getState()[1]);
         return diffOfCols + diffOfRows;

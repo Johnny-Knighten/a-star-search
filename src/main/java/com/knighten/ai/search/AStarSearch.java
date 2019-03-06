@@ -43,7 +43,7 @@ public class AStarSearch {
 
         PriorityQueue<AbstractAStarNode> openSet = new PriorityQueue<AbstractAStarNode>(1, goalState);
         // Used to quickly determine if node with same state is in the open set and to retrieve that states best f
-        HashMap<AbstractAStarNode, Integer> openSetHash = new HashMap<>();
+        HashMap<AbstractAStarNode, Double> openSetHash = new HashMap<>();
         HashSet<AbstractAStarNode> closedSet = new HashSet<>();
 
         // Set Initial Nodes F To Heuristic Score

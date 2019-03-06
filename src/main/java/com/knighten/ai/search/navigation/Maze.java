@@ -108,7 +108,7 @@ public class Maze extends AbstractAStarNode<int[]> {
      * @return the distance from the previous position/maze
      */
     @Override
-    public int distFromParent() {
+    public double distFromParent() {
         return 1;
     }
 
@@ -152,9 +152,9 @@ public class Maze extends AbstractAStarNode<int[]> {
             for(int column = 0; column < this.numberOfCols; column++) {
 
                 if(row == this.currentRow && column == this.currentCol)
-                    builder.append('*');
+                    builder.append("* ");
                 else
-                    builder.append((this.maze[row][column]));
+                    builder.append(Integer.toString(this.maze[row][column]) + ' ');
 
             }
 
