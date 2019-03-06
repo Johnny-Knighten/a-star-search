@@ -71,6 +71,18 @@ public class Maze extends AbstractAStarNode<int[]> {
         this.setParent(parentMaze);
     }
 
+    public int[][] getMaze() {
+        return this.maze;
+    }
+
+    public int getNumberOfRows() {
+        return this.numberOfRows;
+    }
+
+    public int getNumberOfCols() {
+        return this.numberOfCols;
+    }
+
     /**
      * Creates a list of maze objects that represent the next possible positions when navigating the maze. Attempts to
      * move up, down, left, and right from the current position.
@@ -119,7 +131,7 @@ public class Maze extends AbstractAStarNode<int[]> {
      */
     @Override
     public int hashCode() {
-        return Arrays.hashCode(new int[]{currentRow, currentCol});
+        return Arrays.hashCode(getState());
     }
 
 

@@ -13,17 +13,17 @@ public abstract class AbstractAStarNode<T> implements Comparator<AbstractAStarNo
     /**
      * Node's h() heuristic value.
      */
-    private double hScore = Integer.MIN_VALUE;
+    private double hScore = Double.MIN_VALUE;
 
     /**
      * Node's g() graph cost value.
      */
-    private double gScore = 0;
+    private double gScore = 0.0;
 
     /**
      * Node's f() total score value. This is h() + g().
      */
-    private double fScore = 0;
+    private double fScore = 0.0;
 
     /**
      * Node's parent.
