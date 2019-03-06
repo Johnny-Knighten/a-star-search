@@ -254,7 +254,7 @@ public class AStarSearchTests {
 
         Assert.assertNull(solution);
     }
-    
+
     //////////////////////////////////////////////
     // Guarantee Accurate ThreePuzzle Solutions //
     //////////////////////////////////////////////

@@ -11,17 +11,17 @@ import java.util.List;
 public abstract class AbstractAStarNode<T> implements Comparator<AbstractAStarNode<T>>{
 
     /**
-     * Node's h() value.
+     * Node's h() heuristic value.
      */
     private int hScore = Integer.MIN_VALUE;
 
     /**
-     * Node's g() value.
+     * Node's g() graph cost value.
      */
     private int gScore = 0;
 
     /**
-     * Node's f() value.
+     * Node's f() total score value. This is h() + g().
      */
     private int fScore = 0;
 
@@ -37,16 +37,16 @@ public abstract class AbstractAStarNode<T> implements Comparator<AbstractAStarNo
 
 
     /**
-     *  Returns the heuristic score h() for the node. You MUST call calcH() before
-     *  attempting to retrieve the heuristic score, otherwise h() = Integer.MIN_VALUE.
+     *  Returns the heuristic score h() for the node. You MUST call calcH() before attempting to retrieve the heuristic
+     *  score, otherwise h() = Integer.MIN_VALUE.
      *
      * @return the heuristic score h() for the node
      */
     public int getH() {return this.hScore;}
 
     /**
-     * Sets the node's heuristic score h(). Get h() from calcH() then store value
-     * using this method.
+     * Sets the node's heuristic score h(). Get h() from A IHeuristicFunction object then store the value using this
+     * method.
      *
      * @param hScore the heuristic score h() of the node
      */
@@ -81,8 +81,8 @@ public abstract class AbstractAStarNode<T> implements Comparator<AbstractAStarNo
     public void setParent(AbstractAStarNode parent) {this.parent = parent;}
 
     /**
-     * Returns the f() value of the node. Note it does not do the f() calculation
-     * you must store it in the node using setF().
+     * Returns the f() value of the node. Note it does not do the f() calculation you must store it in the node using
+     * setF().
      *
      * @return the f() value of the node
      */
@@ -118,8 +118,7 @@ public abstract class AbstractAStarNode<T> implements Comparator<AbstractAStarNo
      */
     @Override
     public int compare(AbstractAStarNode<T> node1, AbstractAStarNode<T> node2) {return node1.getF() - node2.getF();}
-
-
+    
     //////////////////////
     // Abstract Methods //
     //////////////////////
@@ -140,7 +139,7 @@ public abstract class AbstractAStarNode<T> implements Comparator<AbstractAStarNo
 
     /**
      * Generates the hash code for the node. The hash should be based on node state. We want nodes with the same
-     * state(not same f()) to collide. This allows for determining if a node has been visited before but with lower f().
+     * state(not same f()) to collide. This enables determining if a node has been visited before but with lower f().
      *
      * @return hash code for node
      */
@@ -154,7 +153,5 @@ public abstract class AbstractAStarNode<T> implements Comparator<AbstractAStarNo
      * @return true if other node is equal, false otherwise
      */
     public abstract boolean equals(Object otherNode);
-
-
 
 }

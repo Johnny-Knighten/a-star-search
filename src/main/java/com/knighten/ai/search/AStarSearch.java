@@ -2,8 +2,16 @@ package com.knighten.ai.search;
 
 import com.knighten.ai.search.interfaces.IHeuristicFunction;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.PriorityQueue;
 
+
+/**
+ * An implementation of A* search to find an optimal path in a state space.
+ */
 public class AStarSearch {
 
     private AbstractAStarNode initialState;
@@ -11,25 +19,27 @@ public class AStarSearch {
     private IHeuristicFunction heuristicFunction;
 
     /**
-     * Creates an AStarSearch with initial and goal states
+     * Creates an AStarSearch object with initial state, goal state, and a heuristic function.
      *
      * @param initialState the state where the search begins
      * @param goalState the state where the search ends
+     * @param heuristicFunction the heuristic function used to score nodes
      */
-    public AStarSearch(AbstractAStarNode initialState, AbstractAStarNode goalState, IHeuristicFunction heuristicFunction) {
+    public AStarSearch(AbstractAStarNode initialState, AbstractAStarNode goalState,
+                       IHeuristicFunction heuristicFunction) {
         this.initialState = initialState;
         this.goalState = goalState;
         this.heuristicFunction = heuristicFunction;
     }
 
     /**
-     *  Begins the A* search. Will return null if the goal node can not be found.
+     *  Begins the A* search. Will return null if the goal node cannot be found. Returns a AbstractAStarNode that
+     *  is the last node on the optimal path. You can traverse the optimal path by following each nodes parent
+     *  until you arrive back to the initial node(parent is null).
      *
-     * @return the goal node with its corresponding optimal path parent, or null if the goal state cannot be found
+     * @return null if path does not exist, otherwise the last node on the optimal path
      */
     public AbstractAStarNode search() {
-
-
 
         PriorityQueue<AbstractAStarNode> openSet = new PriorityQueue<AbstractAStarNode>(1, goalState);
         // Used to quickly determine if node with same state is in the open set and to retrieve that states best f
@@ -79,12 +89,12 @@ public class AStarSearch {
 
     /**
      * Takes the output from search() and makes it into a list of states that represent the optimal path from the
-     * initial state to the state.
+     * initial state to the goal state.
      *
-     * @param endPathNode the output from search()
+     * @param endPathNode the output node from search()
      * @return an list of nodes ordered to represent the optimal path
      */
-    public ArrayList<AbstractAStarNode> getPath(AbstractAStarNode endPathNode) {
+    public List<AbstractAStarNode> getPath(AbstractAStarNode endPathNode) {
         ArrayList<AbstractAStarNode> path = new ArrayList<>();
         path.add(endPathNode);
 

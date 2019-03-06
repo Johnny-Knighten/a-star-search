@@ -5,6 +5,9 @@ import com.knighten.ai.search.interfaces.IHeuristicFunction;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An implementation of IDA* search to find an optimal path in a state space.
+ */
 public class IDAStarSearch {
 
     private AbstractAStarNode initialState;
@@ -12,35 +15,48 @@ public class IDAStarSearch {
     private IHeuristicFunction heuristicFunction;
 
     /**
-     * Creates an AStarSearch with initial and goal states
+     * Creates an IDAStarSearch object with initial state, goal state, and a heuristic function.
      *
      * @param initialState the state where the search begins
      * @param goalState the state where the search ends
+     * @param heuristicFunction the heuristic function used to score nodes
      */
-    public IDAStarSearch(AbstractAStarNode initialState, AbstractAStarNode goalState, IHeuristicFunction heuristicFunction) {
+    public IDAStarSearch(AbstractAStarNode initialState, AbstractAStarNode goalState,
+                         IHeuristicFunction heuristicFunction) {
         this.initialState = initialState;
         this.goalState = goalState;
         this.heuristicFunction = heuristicFunction;
     }
 
     /**
-     *  Begins the Iterative Deepening A* search. Will return null if the goal node can not be found.
+     *  Begins the IDA* search. Will return null if the goal node cannot be found. Returns a AbstractAStarNode that
+     *  is the last node on the optimal path. You can traverse the optimal path by following each nodes parent
+     *  until you arrive back to the initial node(parent is null).
      *
-     * @return the goal node with its corresponding optimal path parent, or null if the goal state cannot be found
+     * @return null if path does not exist, otherwise the last node on the optimal path
      */
     public AbstractAStarNode search() {
 
+        // Find Initial F Bound
         int currentFBound = this.heuristicFunction.calculateHeuristic(initialState, goalState);
+
+        // Set Root of Path To Initial Node
         ArrayList<AbstractAStarNode> path = new ArrayList<>();
         path.add(0, initialState);
 
+        // Keep Retrying With Larger F Bound Until One Of The Follow:
+        // 0 Is Returned     - The Goal Node Is Found So Path Contains Optimal Path
+        // Integer.MAX_Value - No Node Was Found With A F Higher Than F Boundary So Goal Node Does Not Exist
         int smallestNewFBound;
         do {
+            // Start Search
             smallestNewFBound = recur_search(path, 0, currentFBound);
 
+            // Check If Goal Node Was Found
             if(smallestNewFBound == 0)
                 return path.get(path.size()-1);
 
+            // Set New F Boundary
             currentFBound = smallestNewFBound;
         } while(currentFBound != Integer.MAX_VALUE);
 
@@ -48,17 +64,20 @@ public class IDAStarSearch {
     }
 
     /**
-     * Recursively searches down the children of nodes. Instantly stops when a node had a higher f value than the
-     * current iterations fBoundary. Will return the smallest f value that has surpassed the currentFBoundary, this f
-     * value will be used as the currentFBoundary in the next iteration.
+     * Recursively searches down the children of nodes. Will prevent itself from search down path with higher f than
+     * current f boundary. If paths with higher f boundary are found then it will return the smallest f over the
+     * boundary found. This smallest f over f boundary is a potential new f boundary during the next iteration. Will
+     * return 0 if goal node is found and Integer.MAX_VALUE if there is not a single path with a f greater than the
+     * f boundary, meaning the goal node cannot be found.
      *
      * @param path list of nodes ordered by the order they were visited
      * @param graphCost current graph cost to get to the current node
      * @param currentFBound the max f boundary for current iteration
-     * @return the smallest f value in the  iteration that was greater than the fBoundary for the iteration
+     * @return the smallest f value in the iteration that was greater than the fBoundary for the iteration
      */
     private int recur_search(ArrayList<AbstractAStarNode> path, int graphCost, int currentFBound) {
 
+        // Set G, H, and F of Current Node
         AbstractAStarNode currentNode = path.get(path.size()-1);
         currentNode.setH(this.heuristicFunction.calculateHeuristic(currentNode, this.goalState));
         currentNode.setG(graphCost);
@@ -104,9 +123,9 @@ public class IDAStarSearch {
 
     /**
      * Takes the output from search() and makes it into a list of states that represent the optimal path from the
-     * initial state to the state.
+     * initial state to the goal state.
      *
-     * @param endPathNode the output from search()
+     * @param endPathNode the output node from search()
      * @return an list of nodes ordered to represent the optimal path
      */
     public ArrayList<AbstractAStarNode> getPath(AbstractAStarNode endPathNode) {
