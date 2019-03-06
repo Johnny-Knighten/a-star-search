@@ -44,7 +44,7 @@ public class AStarSearchTests {
     private AbstractAStarNode successor1;
     private AbstractAStarNode successor2;
     private IHeuristicFunction mockHeuristic;
-
+    private AbstractAStarNode mockInitialNoSuccessors;
 
     @Before
     public void setup() {
@@ -75,6 +75,9 @@ public class AStarSearchTests {
         mockInitial = Mockito.mock(AbstractAStarNode.class);
         Mockito.when(mockInitial.getG()).thenReturn(0);
 
+        mockInitialNoSuccessors = Mockito.mock(AbstractAStarNode.class);
+        Mockito.when(mockInitialNoSuccessors.getG()).thenReturn(0);
+
         mockHeuristic = Mockito.mock(IHeuristicFunction.class);
 
         successor1 = Mockito.mock(AbstractAStarNode.class);
@@ -96,7 +99,7 @@ public class AStarSearchTests {
     ////////////////////
 
     @Test
-    public void searchUseCorrectAndGoalFound() {
+    public void searchUseCorrectMethodsAndGoalFound() {
         AStarSearch searcher = new AStarSearch(mockGoal, mockGoal, mockHeuristic);
 
         AbstractAStarNode solution = searcher.search();
@@ -116,13 +119,13 @@ public class AStarSearchTests {
 
     @Test
     public void searchUseCorrectMethodsWithNoSuccessors() {
-        AStarSearch searcher = new AStarSearch(mockInitial, mockGoal, mockHeuristic);
+        AStarSearch searcher = new AStarSearch(mockInitialNoSuccessors, mockGoal, mockHeuristic);
 
         AbstractAStarNode solution = searcher.search();
 
         // Verify Initial Nodes F Value Is Set To Its Heuristic
-        verify(mockHeuristic, times(1)).calculateHeuristic(mockInitial, mockGoal);
-        verify(mockInitial, times(1)).setF(anyInt());
+        verify(mockHeuristic, times(1)).calculateHeuristic(mockInitialNoSuccessors, mockGoal);
+        verify(mockInitialNoSuccessors, times(1)).setF(anyInt());
 
         // Now The Queue Should Be In Use
 
@@ -130,7 +133,7 @@ public class AStarSearchTests {
         // verify(mockInitial, times(1)).equals(mockGoal);
 
         //Generate Successors
-        verify(mockInitial, times(1)).getSuccessors();
+        verify(mockInitialNoSuccessors, times(1)).getSuccessors();
 
         // Algorithm Ends Due To Goal Not Being Found
         Assert.assertNull(solution);
@@ -251,8 +254,7 @@ public class AStarSearchTests {
 
         Assert.assertNull(solution);
     }
-
-
+    
     //////////////////////////////////////////////
     // Guarantee Accurate ThreePuzzle Solutions //
     //////////////////////////////////////////////
