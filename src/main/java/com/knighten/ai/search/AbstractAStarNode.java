@@ -118,7 +118,7 @@ public abstract class AbstractAStarNode<T> implements Comparator<AbstractAStarNo
      */
     @Override
     public int compare(AbstractAStarNode<T> node1, AbstractAStarNode<T> node2) {return node1.getF() - node2.getF();}
-    
+
     //////////////////////
     // Abstract Methods //
     //////////////////////

@@ -30,6 +30,7 @@ public class EightPuzzle extends AbstractNPuzzle {
 
         this.setState(puzzleBoard);
 
+        // Find Location of The Empty Space aka 0
         for(int currentSpace=0; currentSpace<puzzleBoard.length; currentSpace++)
             if(puzzleBoard[currentSpace] == 0)
                 this.setEmptySpaceLocation(currentSpace);
@@ -52,7 +53,8 @@ public class EightPuzzle extends AbstractNPuzzle {
 
 
     /**
-     * Returns the successor states for the current search node.
+     * Returns the successor states for the current search node. Attempts to move tiles into the empty space to create
+     * new states.
      *
      * @return array list of successor states.
      */
@@ -76,6 +78,7 @@ public class EightPuzzle extends AbstractNPuzzle {
         if(((this.getEmptySpaceLocation() + 3) < 9) && (this.getEmptySpaceLocation() / 3 != 2))
             possibleNextMoves.add(this.getEmptySpaceLocation() + 3);
 
+        // Create List of All Successor States
         ArrayList<AbstractAStarNode> successors = new ArrayList<>();
         int[] successorBoard;
         for(Integer nextSpace: possibleNextMoves){

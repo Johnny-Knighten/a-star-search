@@ -30,6 +30,7 @@ public class ThreePuzzle extends AbstractNPuzzle {
 
         this.setState(puzzleBoard);
 
+        // Find Location of The Empty Space aka 0
         for(int currentSpace = 0; currentSpace < puzzleBoard.length; currentSpace++)
             if(puzzleBoard[currentSpace] == 0)
                 this.setEmptySpaceLocation(currentSpace);
@@ -52,7 +53,8 @@ public class ThreePuzzle extends AbstractNPuzzle {
 
 
     /**
-     * Returns the successor states for the current search node.
+     * Returns the successor states for the current search node. Attempts to move tiles into the empty space to create
+     * new states.
      *
      * @return array list of successor states.
      */
@@ -72,6 +74,7 @@ public class ThreePuzzle extends AbstractNPuzzle {
             possibleNextMoves.add(3);
         }
 
+        // Create List of All Successor States
         ArrayList<AbstractAStarNode> successors = new ArrayList<>();
         int[] successorBoard;
         for(Integer nextSpace: possibleNextMoves){
@@ -87,8 +90,8 @@ public class ThreePuzzle extends AbstractNPuzzle {
     // Usage Example
     public static void main(String[] args) {
 
-        int[] initStateArray = {0,3,2,1};
-        int[] goalStateArray = {1,2,3,0};
+        int[] initStateArray = {0, 3, 2, 1};
+        int[] goalStateArray = {1, 2, 3, 0};
 
         ThreePuzzle initialState = new ThreePuzzle(initStateArray);
         ThreePuzzle goalState = new ThreePuzzle(goalStateArray);
