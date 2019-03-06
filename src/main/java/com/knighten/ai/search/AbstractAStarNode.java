@@ -1,7 +1,7 @@
 package com.knighten.ai.search;
 
-import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Abstract class that is extended to create problems that are solvable by A* search variants.
@@ -129,7 +129,7 @@ public abstract class AbstractAStarNode<T> implements Comparator<AbstractAStarNo
      *
      * @return list of successor nodes
      */
-    public abstract ArrayList<AbstractAStarNode> getSuccessors();
+    public abstract List<AbstractAStarNode> getSuccessors();
 
     /**
      * Returns the distance from the node to its parent.

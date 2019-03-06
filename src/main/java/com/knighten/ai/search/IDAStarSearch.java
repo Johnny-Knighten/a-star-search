@@ -3,6 +3,7 @@ package com.knighten.ai.search;
 import com.knighten.ai.search.interfaces.IHeuristicFunction;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class IDAStarSearch {
 
@@ -72,7 +73,7 @@ public class IDAStarSearch {
             return 0;
 
         int minFFound = Integer.MAX_VALUE;
-        ArrayList<AbstractAStarNode> children = currentNode.getSuccessors();
+        List<AbstractAStarNode> children = currentNode.getSuccessors();
 
         // Expand on each child node
         for(AbstractAStarNode child: children) {

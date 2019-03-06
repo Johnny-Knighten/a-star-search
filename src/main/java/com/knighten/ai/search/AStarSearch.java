@@ -2,10 +2,7 @@ package com.knighten.ai.search;
 
 import com.knighten.ai.search.interfaces.IHeuristicFunction;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class AStarSearch {
 
@@ -32,26 +29,34 @@ public class AStarSearch {
      */
     public AbstractAStarNode search() {
 
-        HashSet<AbstractAStarNode> closedSet = new HashSet<>();
+
 
         PriorityQueue<AbstractAStarNode> openSet = new PriorityQueue<AbstractAStarNode>(1, goalState);
         // Used to quickly determine if node with same state is in the open set and to retrieve that states best f
         HashMap<AbstractAStarNode, Integer> openSetHash = new HashMap<>();
+        HashSet<AbstractAStarNode> closedSet = new HashSet<>();
+
+        // Set Initial Nodes F To Heuristic Score
         initialState.setF(this.heuristicFunction.calculateHeuristic(this.initialState, this.goalState));
+
+        // Add Initial Node Into Queue/HashMap
         openSet.add(initialState);
         openSetHash.put(initialState, initialState.getF());
 
         while(!openSet.isEmpty()) {
             AbstractAStarNode currentState = openSet.poll();
 
+            // Check If Goal Is Found
             if(currentState.equals(goalState))
                 return currentState;
 
+            // Add To Closed Set Since We Have Generated The Nodes Successors
             closedSet.add(currentState);
-            ArrayList<AbstractAStarNode> childrenStates = currentState.getSuccessors();
+            List<AbstractAStarNode> childrenStates = currentState.getSuccessors();
 
             for(AbstractAStarNode childState: childrenStates) {
 
+                // If Child Node's Children Has Already Been Generated Then Skip Child
                 if(closedSet.contains(childState))
                     continue;
 
@@ -59,6 +64,7 @@ public class AStarSearch {
                 childState.setH(this.heuristicFunction.calculateHeuristic(childState, this.goalState));
                 childState.setF(childState.getG() + childState.getH());
 
+                // If Child Node Is In Queue And The Version In Queue Has A Smaller F() Then Do Not Add The Child To Queue
                 // Note the short circuit logic
                 if(openSetHash.containsKey(childState) && openSetHash.get(childState) < childState.getF())
                     continue;
