@@ -9,11 +9,11 @@ import com.knighten.ai.search.AbstractAStarNode;
 public interface IHeuristicFunction {
 
     /**
-     * Takes two AbstractAStarNodes and calculates the heuristic score for the current search node.
+     * Calculates the heuristic score for the current search node when compared to the goal node. The goal node should
+     * be contained in the implemented IHeuristicFunction class.
      *
      * @param searchNode the node being compared to the goal
-     * @param goalNode the goal node/state of the search problem
      * @return the heuristic score for the search node
      */
-    public int calculateHeuristic(AbstractAStarNode searchNode, AbstractAStarNode goalNode);
+    public int calculateHeuristic(AbstractAStarNode searchNode);
 }

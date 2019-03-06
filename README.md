@@ -37,22 +37,27 @@ The javadocs can be found in /build/docs/javadoc/.
 
 The AStarSearch and IDAStarSearch classes are responsible for performing state space searches using the algorithm they
 are respectively named after. Both classes must be provided an initial state and a goal state, which are instances of a
-class that extends the abstract class AStarNode. The AStarNode abstract class uses a generic which will be the state 
-representation of the node. AStarNode contains methods for getting/setting a nodes graph cost(g), heuristic score(h), 
-total score(f), state representation, and parent node. Classes that extend AStarNode must implement methods that 
-generate successor nodes, calculates the search graph distance from the nodes parent, calculates the nodes heuristic 
-score, generate a hash code, and an equals method that is based on the node's state representation. Essentially a state
-space search problem must be represented by a class that extends AStarNode.
+class that extends AbstractStarNode. The AbstractAStarNode class uses a generic that is the state 
+representation of the node. AbstractAStarNode contains methods for getting/setting a nodes graph cost(g),
+heuristic score(h), total score(f), state representation, and parent node. Classes that extend AbstractAStarNode must
+implement methods that generate successor nodes, calculates the search graph distance from the nodes parent,
+generate a hash code, and an equals method that is based on the node's state representation. Essentially a state
+space search problem must be represented by a class that extends AbstractAStarNode.
 
-After creating a class that represents a state space search problem, you then create search space nodes that represents
-the initial and goal state. Next you supply these two nodes to either AStarSearch or IDAStarSearch's constructor. To 
-begin the search method is called to begin the search, both AStarSearch and IDAStarSearch provide a search method. The 
-search method will return the final node on the search path, or null if the goal state cannot be found. To generate the
-full path as a list, call the getPath method supplying it the node returned from the search method.
+Besides the creating the classes that represent the search nodes, you must also provide a heuristic function that can
+score how close a node is to the goal node. Heuristic functions in this framework are represented by IHeuristicFunction.
+
+After creating a class that represents a state space search problem and heuristic function, you then create search space
+nodes that represents the initial and goal state and an instance of your desired heuristic function. Next you supply
+these two nodes to either AStarSearch or  IDAStarSearch's constructor. To begin the search method is called to begin the
+search, both AStarSearch and IDAStarSearch provide a search method. The  search method will return the final node on the 
+search path, or null if the goal state cannot be found. To generate the full path as a list, call the getPath method
+supplying it the node returned from the search method.
 
 
 To summarize, in order to perform a state space search:
 1. Create a class that extends AStarNode which represents the state space search problem
+1. Create a class that IHeuristicFunction  which represents a heuristic function
 2. Create two search node that represent the initial and goal state of the search problem
 3. Create an instance of AStarSearch or IDAStarSearch and supply the two nodes created above
 4. Call the search method provided by AStarSearch or IDAStarSearch
@@ -63,7 +68,9 @@ A quick abstract example on how to use the searcher:
 AStarNode initialState = new SearchProblem(initialState);
 AStarNode goalState = new SearchProblem(goalState);
 
-AStarSearch searcher = new AStarSearch(initialState, goalState);
+IHeuristicFunction heuristic = new SomeHeuristic(goalState)
+
+AStarSearch searcher = new AStarSearch(initialState, goalState, heuristic);
 AStarNode finalSearchNode = searcher.search();
 
 List<AStarNode> path = searcher.getPath(finalSearchNode);

@@ -38,7 +38,7 @@ public class IDAStarSearch {
     public AbstractAStarNode search() {
 
         // Find Initial F Bound
-        int currentFBound = this.heuristicFunction.calculateHeuristic(initialState, goalState);
+        int currentFBound = this.heuristicFunction.calculateHeuristic(initialState);
 
         // Set Root of Path To Initial Node
         ArrayList<AbstractAStarNode> path = new ArrayList<>();
@@ -79,7 +79,7 @@ public class IDAStarSearch {
 
         // Set G, H, and F of Current Node
         AbstractAStarNode currentNode = path.get(path.size()-1);
-        currentNode.setH(this.heuristicFunction.calculateHeuristic(currentNode, this.goalState));
+        currentNode.setH(this.heuristicFunction.calculateHeuristic(currentNode));
         currentNode.setG(graphCost);
         currentNode.setF(graphCost + currentNode.getH());
 
@@ -128,7 +128,7 @@ public class IDAStarSearch {
      * @param endPathNode the output node from search()
      * @return an list of nodes ordered to represent the optimal path
      */
-    public ArrayList<AbstractAStarNode> getPath(AbstractAStarNode endPathNode) {
+    public List<AbstractAStarNode> getPath(AbstractAStarNode endPathNode) {
         ArrayList<AbstractAStarNode> path = new ArrayList<>();
         path.add(endPathNode);
 

@@ -3,7 +3,21 @@ package com.knighten.ai.search.npuzzle;
 import com.knighten.ai.search.AbstractAStarNode;
 import com.knighten.ai.search.interfaces.IHeuristicFunction;
 
+/**
+ * Manhattan distance heuristic function for the NPuzzle problem.
+ */
 public class NPuzzleManhattanDist implements IHeuristicFunction {
+
+    private AbstractAStarNode goalNode;
+
+    public NPuzzleManhattanDist(AbstractAStarNode goalNode) {
+
+        if(goalNode == null)
+            throw new IllegalArgumentException("Goal Node Cannot Be Null");
+
+        this.goalNode = goalNode;
+    }
+
 
     /**
      * Calculates the manhattan distance between two NPuzzles. For each position of search board we find how far
@@ -13,19 +27,15 @@ public class NPuzzleManhattanDist implements IHeuristicFunction {
      * rows down and 2 columns right. We ignore the empty space as part of this calculation.
      *
      * @param searchNode the search node whose heuristic value is being calculated
-     * @param goalNode the goal node the search node is being compared to
      * @return returns the calculated heuristic(h()) score
      */
     @Override
-    public int calculateHeuristic(AbstractAStarNode searchNode, AbstractAStarNode goalNode) {
+    public int calculateHeuristic(AbstractAStarNode searchNode) {
 
         if(searchNode == null)
             throw new IllegalArgumentException("Search Node Cannot Be Null");
 
-        if(goalNode == null)
-            throw new IllegalArgumentException("Goal Node Cannot Be Null");
-
-        int[] goalBoard = (int[]) goalNode.getState();
+        int[] goalBoard = (int[]) this.goalNode.getState();
         int[] currentBoard = (int[]) searchNode.getState();
         int flatBoardLength = goalBoard.length;
         int rowLength = (int) Math.sqrt(goalBoard.length);

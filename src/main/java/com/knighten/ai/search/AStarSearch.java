@@ -47,7 +47,7 @@ public class AStarSearch {
         HashSet<AbstractAStarNode> closedSet = new HashSet<>();
 
         // Set Initial Nodes F To Heuristic Score
-        initialState.setF(this.heuristicFunction.calculateHeuristic(this.initialState, this.goalState));
+        initialState.setF(this.heuristicFunction.calculateHeuristic(this.initialState));
 
         // Add Initial Node Into Queue/HashMap
         openSet.add(initialState);
@@ -71,7 +71,7 @@ public class AStarSearch {
                     continue;
 
                 childState.setG(childState.getParent().getG() + childState.distFromParent());
-                childState.setH(this.heuristicFunction.calculateHeuristic(childState, this.goalState));
+                childState.setH(this.heuristicFunction.calculateHeuristic(childState));
                 childState.setF(childState.getG() + childState.getH());
 
                 // If Child Node Is In Queue And The Version In Queue Has A Smaller F() Then Do Not Add The Child To Queue

@@ -96,7 +96,7 @@ public class ThreePuzzle extends AbstractNPuzzle {
         ThreePuzzle initialState = new ThreePuzzle(initStateArray);
         ThreePuzzle goalState = new ThreePuzzle(goalStateArray);
 
-        NPuzzleManhattanDist heuristicFunction = new NPuzzleManhattanDist();
+        NPuzzleManhattanDist heuristicFunction = new NPuzzleManhattanDist(goalState);
 
         AStarSearch searcher = new AStarSearch(initialState, goalState, heuristicFunction);
         AbstractAStarNode finalSearchNode = searcher.search();

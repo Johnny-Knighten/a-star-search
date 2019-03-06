@@ -100,7 +100,7 @@ public class EightPuzzle extends AbstractNPuzzle {
         EightPuzzle initialState = new EightPuzzle(initStateArray);
         EightPuzzle goalState = new EightPuzzle(goalStateArray);
 
-        NPuzzleManhattanDist heuristicFunction = new NPuzzleManhattanDist();
+        NPuzzleManhattanDist heuristicFunction = new NPuzzleManhattanDist(goalState);
 
         IDAStarSearch searcher = new IDAStarSearch(initialState, goalState, heuristicFunction);
         AbstractAStarNode finalSearchNode = searcher.search();
