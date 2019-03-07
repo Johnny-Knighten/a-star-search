@@ -2,6 +2,8 @@ package baseclasses;
 
 import com.knighten.ai.search.AbstractAStarNode;
 import com.knighten.ai.search.interfaces.IHeuristicFunction;
+import com.knighten.ai.search.navigation.NavigateMaze;
+import com.knighten.ai.search.navigation.NavigationManhattanDist;
 import com.knighten.ai.search.npuzzle.EightPuzzle;
 import com.knighten.ai.search.IDAStarSearch;
 import com.knighten.ai.search.npuzzle.NPuzzleManhattanDist;
@@ -46,7 +48,7 @@ public class IDAStarSearchTests {
 
 
     @Before
-    public void setup()  {
+    public void setup() {
 
         standardGoalBoard8Puzz = new EightPuzzle(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8});
         oneMoveStandardInitBoard8Puzz = new EightPuzzle(new int[]{1, 0, 2, 3, 4, 5, 6, 7, 8});
@@ -62,7 +64,7 @@ public class IDAStarSearchTests {
 
         standardGoalBoard3Puzz = new ThreePuzzle(new int[]{0, 1, 2, 3});
         oneMoveInitBoard3Puzz = new ThreePuzzle(new int[]{1, 0, 2, 3});
-        sevenMoveInitBoard3Puzz = new ThreePuzzle(new int[]{3 ,2 ,1, 0});
+        sevenMoveInitBoard3Puzz = new ThreePuzzle(new int[]{3, 2, 1, 0});
         noSolutionInitBoard3Puzz = new ThreePuzzle(new int[]{3, 0, 2, 1});
 
         mockGoal = Mockito.mock(AbstractAStarNode.class);
@@ -253,7 +255,7 @@ public class IDAStarSearchTests {
     @Test
     public void thirtyOneMove8Puzzle() {
         IHeuristicFunction heuristic = new NPuzzleManhattanDist(thirtyOneMoveGoalBoard8Puzz);
-        IDAStarSearch searcher = new IDAStarSearch(thirtyOneMoveInitBoard8Puzz,thirtyOneMoveGoalBoard8Puzz, heuristic);
+        IDAStarSearch searcher = new IDAStarSearch(thirtyOneMoveInitBoard8Puzz, thirtyOneMoveGoalBoard8Puzz, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
@@ -311,6 +313,48 @@ public class IDAStarSearchTests {
         AbstractAStarNode solution = searcher.search();
 
         Assert.assertNull(solution);
+    }
+
+    ///////////////////////////////////////////////
+    // Guarantee Accurate NavigateMaze Solutions //
+    ///////////////////////////////////////////////
+
+    @Test
+    public void noSolutionNavigateMaze() {
+        NavigateMaze goal = new NavigateMaze(new int[][]{{1, 1}, {1, 0}}, 1, 1);
+        NavigateMaze inital = new NavigateMaze(new int[][]{{1, 1}, {1, 0}}, 0, 0);
+
+        IHeuristicFunction heuristic = new NavigationManhattanDist(goal);
+        IDAStarSearch searcher = new IDAStarSearch(inital, goal, heuristic);
+        AbstractAStarNode solution = searcher.search();
+
+        Assert.assertNull(solution);
+    }
+
+    @Test
+    public void twoMovesNavigateMaze() {
+        NavigateMaze goal = new NavigateMaze(new int[][]{{1, 1}, {1, 1}}, 1, 1);
+        NavigateMaze inital = new NavigateMaze(new int[][]{{1, 1}, {1, 1}}, 0, 0);
+
+        IHeuristicFunction heuristic = new NavigationManhattanDist(goal);
+        IDAStarSearch searcher = new IDAStarSearch(inital, goal, heuristic);
+        AbstractAStarNode solution = searcher.search();
+        List<AbstractAStarNode> path = searcher.getPath(solution);
+
+        Assert.assertEquals(3, path.size());
+    }
+
+    @Test
+    public void fourMovesNavigateMaze() {
+        NavigateMaze goal = new NavigateMaze(new int[][]{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}}, 2, 2);
+        NavigateMaze inital = new NavigateMaze(new int[][]{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}}, 0, 0);
+
+        IHeuristicFunction heuristic = new NavigationManhattanDist(goal);
+        IDAStarSearch searcher = new IDAStarSearch(inital, goal, heuristic);
+        AbstractAStarNode solution = searcher.search();
+        List<AbstractAStarNode> path = searcher.getPath(solution);
+
+        Assert.assertEquals(5, path.size());
     }
 
 }

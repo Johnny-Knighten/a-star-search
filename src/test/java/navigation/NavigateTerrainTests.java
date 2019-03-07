@@ -1,6 +1,5 @@
 package navigation;
 
-
 import com.knighten.ai.search.AbstractAStarNode;
 import com.knighten.ai.search.navigation.NavigateTerrain;
 import org.junit.Assert;
