@@ -1,49 +1,84 @@
 package com.knighten.ai.search.navigation;
 
+import com.knighten.ai.search.AStarSearch;
 import com.knighten.ai.search.AbstractAStarNode;
-import com.knighten.ai.search.IDAStarSearch;
 import com.knighten.ai.search.interfaces.IHeuristicFunction;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NavigateTerrain extends Maze {
+/**
+ * NavigateTerrain is the state space(search node) representation of attempting to navigate a terrain were certain areas
+ * are easy to move in that others. You can image that walking down a path is easier than swimming. The state is an
+ * integer array containing the current row and current column. NavigateTerrains terrains are represented by a 0 being
+ * an obstacle you cannot travel through and all other spaces are positive integers. The value of non-zero spaces
+ * represent how hard it is to traverse that area. For instance walking down a path may be 1 because its simple while
+ * swimming may be a 2.
+ */
+public class NavigateTerrain extends AbstractNavigate {
 
+    /**
+     * Creates a NavigateTerrain object with a null parent.
+     *
+     * @param terrain the terrain being navigated
+     * @param currentRow the row of the current position
+     * @param currentCol the column of the current position
+     */
     public NavigateTerrain(int[][] terrain, int currentRow, int currentCol) {
         super(terrain, currentRow, currentCol);
     }
 
-    public NavigateTerrain(int[][] maze, int currentRow, int currentCol, NavigateTerrain parentMaze) {
-        super(maze, currentRow, currentCol, parentMaze);
+    /**
+     * Creates a NavigateTerrain object with parent.
+     *
+     * @param terrain the maze being navigated
+     * @param currentRow the row of the current position
+     * @param currentCol the column of the current position
+     * @param parentMaze the parent of the new maze
+     */
+    public NavigateTerrain(int[][] terrain, int currentRow, int currentCol, NavigateTerrain parentMaze) {
+        super(terrain, currentRow, currentCol);
+        this.setParent(parentMaze);
     }
 
-    @Override
-    public double distFromParent() {
-        return super.getMaze()[this.getState()[0]][this.getState()[1]];
-    }
-
+    /**
+     * Creates a list of NavigateTerrain objects that represent the next possible positions when navigating the maze.
+     * Attempts to move up, down, left, and right from the current position.
+     *
+     * @return a list of the next possible positions
+     */
     @Override
     public List<AbstractAStarNode> getSuccessors() {
         List<AbstractAStarNode> possibleMoves = new ArrayList<>();
 
         // Move Up
-        if(this.getState()[0] - 1 >= 0 && super.getMaze()[this.getState()[0] - 1][this.getState()[1]] != 0)
-            possibleMoves.add(new NavigateTerrain(super.getMaze(), this.getState()[0] - 1, this.getState()[1], this));
+        if(this.getState()[0] - 1 >= 0 && this.getEnvironment()[this.getState()[0] - 1][this.getState()[1]] != 0)
+            possibleMoves.add(new NavigateTerrain(this.getEnvironment(), this.getState()[0] - 1, this.getState()[1], this));
 
         // Move Down
-        if(this.getState()[0] + 1 < super.getNumberOfRows() && super.getMaze()[this.getState()[0] + 1][this.getState()[1]] != 0)
-            possibleMoves.add(new NavigateTerrain(super.getMaze(), this.getState()[0] + 1, this.getState()[1], this));
+        if(this.getState()[0] + 1 < super.getNumberOfRows() && this.getEnvironment()[this.getState()[0] + 1][this.getState()[1]] != 0)
+            possibleMoves.add(new NavigateTerrain(this.getEnvironment(), this.getState()[0] + 1, this.getState()[1], this));
 
         // Move Left
-        if(this.getState()[1] - 1 >= 0 && super.getMaze()[this.getState()[0]][this.getState()[1] - 1] != 0)
-            possibleMoves.add(new NavigateTerrain(super.getMaze(), this.getState()[0], this.getState()[1] - 1, this));
+        if(this.getState()[1] - 1 >= 0 && this.getEnvironment()[this.getState()[0]][this.getState()[1] - 1] != 0)
+            possibleMoves.add(new NavigateTerrain(this.getEnvironment(), this.getState()[0], this.getState()[1] - 1, this));
 
         //Move Right
-        if(this.getState()[1] + 1 < super.getNumberOfCols() && super.getMaze()[this.getState()[0]][this.getState()[1] + 1] != 0)
-            possibleMoves.add(new NavigateTerrain(super.getMaze(), this.getState()[0], this.getState()[1] + 1, this));
-
+        if(this.getState()[1] + 1 < super.getNumberOfCols() && this.getEnvironment()[this.getState()[0]][this.getState()[1] + 1] != 0)
+            possibleMoves.add(new NavigateTerrain(this.getEnvironment(), this.getState()[0], this.getState()[1] + 1, this));
 
         return possibleMoves;
+    }
+
+    /**
+     * Since we are treating some parts of the environment as being harder to navigate than others the distance from
+     * a nodes parent is the current position's value in the environment.
+     *
+     * @return the value of the environment at the current position
+     */
+    @Override
+    public double distFromParent() {
+        return this.getEnvironment()[this.getState()[0]][this.getState()[1]];
     }
 
 
@@ -61,7 +96,6 @@ public class NavigateTerrain extends Maze {
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
         };
 
-
         int startRow = 0;
         int startCol = 0;
         int goalRow = 0;
@@ -72,7 +106,7 @@ public class NavigateTerrain extends Maze {
 
         IHeuristicFunction heuristicFunction = new NavigationManhattanDist(goal);
 
-        IDAStarSearch searcher = new IDAStarSearch(initial, goal, heuristicFunction);
+        AStarSearch searcher = new AStarSearch(initial, goal, heuristicFunction);
 
         AbstractAStarNode finalSearchNode = searcher.search();
 
