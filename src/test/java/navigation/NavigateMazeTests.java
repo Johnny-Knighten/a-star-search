@@ -47,6 +47,11 @@ public class NavigateMazeTests {
         new NavigateMaze(new int[][]{{0, 0}, {1, 1}}, 0, 10);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void constructorMazeWithNon0Or1() {
+        new NavigateMaze(new int[][]{{0, 0}, {1, 9}}, 0, 0);
+    }
+
     /////////////////////
     // Method Checking //
     /////////////////////

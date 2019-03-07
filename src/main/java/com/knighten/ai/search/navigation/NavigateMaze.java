@@ -5,6 +5,7 @@ import com.knighten.ai.search.IDAStarSearch;
 import com.knighten.ai.search.interfaces.IHeuristicFunction;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,7 +23,15 @@ public class NavigateMaze extends AbstractNavigate {
      * @param currentCol the column of the current position
      */
     public NavigateMaze(int[][] maze, int currentRow, int currentCol) {
+
         super(maze, currentRow, currentCol);
+
+        boolean valueCheck = Arrays.stream(maze)
+                .flatMapToInt(Arrays::stream)
+                .anyMatch((i) -> i != 0 && i != 1);
+
+        if(valueCheck)
+            throw new IllegalArgumentException("Values Inside A Maze Can Only Be 0 or 1");
     }
 
     /**
