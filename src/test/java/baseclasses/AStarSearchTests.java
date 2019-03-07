@@ -4,6 +4,7 @@ import com.knighten.ai.search.AbstractAStarNode;
 import com.knighten.ai.search.AStarSearch;
 import com.knighten.ai.search.interfaces.IHeuristicFunction;
 import com.knighten.ai.search.navigation.NavigateMaze;
+import com.knighten.ai.search.navigation.NavigateTerrain;
 import com.knighten.ai.search.navigation.NavigationManhattanDist;
 import com.knighten.ai.search.npuzzle.EightPuzzle;
 import com.knighten.ai.search.npuzzle.NPuzzleManhattanDist;
@@ -313,10 +314,10 @@ public class AStarSearchTests {
     @Test
     public void noSolutionNavigateMaze() {
         NavigateMaze goal = new NavigateMaze(new int[][]{{1, 1}, {1, 0}}, 1, 1);
-        NavigateMaze inital = new NavigateMaze(new int[][]{{1, 1}, {1, 0}}, 0, 0);
+        NavigateMaze initial = new NavigateMaze(new int[][]{{1, 1}, {1, 0}}, 0, 0);
 
         IHeuristicFunction heuristic = new NavigationManhattanDist(goal);
-        AStarSearch searcher = new AStarSearch(inital, goal, heuristic);
+        AStarSearch searcher = new AStarSearch(initial, goal, heuristic);
         AbstractAStarNode solution = searcher.search();
 
         Assert.assertNull(solution);
@@ -325,10 +326,10 @@ public class AStarSearchTests {
     @Test
     public void twoMovesNavigateMaze() {
         NavigateMaze goal = new NavigateMaze(new int[][]{{1, 1}, {1, 1}}, 1, 1);
-        NavigateMaze inital = new NavigateMaze(new int[][]{{1, 1}, {1, 1}}, 0, 0);
+        NavigateMaze initial = new NavigateMaze(new int[][]{{1, 1}, {1, 1}}, 0, 0);
 
         IHeuristicFunction heuristic = new NavigationManhattanDist(goal);
-        AStarSearch searcher = new AStarSearch(inital, goal, heuristic);
+        AStarSearch searcher = new AStarSearch(initial, goal, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
@@ -338,10 +339,52 @@ public class AStarSearchTests {
     @Test
     public void fourMovesNavigateMaze() {
         NavigateMaze goal = new NavigateMaze(new int[][]{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}}, 2, 2);
-        NavigateMaze inital = new NavigateMaze(new int[][]{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}}, 0, 0);
+        NavigateMaze initial = new NavigateMaze(new int[][]{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}}, 0, 0);
 
         IHeuristicFunction heuristic = new NavigationManhattanDist(goal);
-        AStarSearch searcher = new AStarSearch(inital, goal, heuristic);
+        AStarSearch searcher = new AStarSearch(initial, goal, heuristic);
+        AbstractAStarNode solution = searcher.search();
+        List<AbstractAStarNode> path = searcher.getPath(solution);
+
+        Assert.assertEquals(5, path.size());
+    }
+
+    //////////////////////////////////////////////////
+    // Guarantee Accurate NavigateTerrain Solutions //
+    //////////////////////////////////////////////////
+
+    @Test
+    public void noSolutionNavigateTerrain() {
+        NavigateTerrain goal = new NavigateTerrain(new int[][]{{1, 1}, {1, 0}}, 1, 1);
+        NavigateTerrain initial = new NavigateTerrain(new int[][]{{1, 1}, {1, 0}}, 0, 0);
+
+        IHeuristicFunction heuristic = new NavigationManhattanDist(goal);
+        AStarSearch searcher = new AStarSearch(initial, goal, heuristic);
+        AbstractAStarNode solution = searcher.search();
+
+        Assert.assertNull(solution);
+    }
+
+    @Test
+    public void twoMovesNavigateTerrain() {
+        NavigateTerrain goal = new NavigateTerrain(new int[][]{{1, 1}, {1, 1}}, 1, 1);
+        NavigateTerrain initial = new NavigateTerrain(new int[][]{{1, 1}, {1, 1}}, 0, 0);
+
+        IHeuristicFunction heuristic = new NavigationManhattanDist(goal);
+        AStarSearch searcher = new AStarSearch(initial, goal, heuristic);
+        AbstractAStarNode solution = searcher.search();
+        List<AbstractAStarNode> path = searcher.getPath(solution);
+
+        Assert.assertEquals(3, path.size());
+    }
+
+    @Test
+    public void fourMovesNavigateTerrain() {
+        NavigateTerrain goal = new NavigateTerrain(new int[][]{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}}, 2, 2);
+        NavigateTerrain initial = new NavigateTerrain(new int[][]{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}}, 0, 0);
+
+        IHeuristicFunction heuristic = new NavigationManhattanDist(goal);
+        AStarSearch searcher = new AStarSearch(initial, goal, heuristic);
         AbstractAStarNode solution = searcher.search();
         List<AbstractAStarNode> path = searcher.getPath(solution);
 
