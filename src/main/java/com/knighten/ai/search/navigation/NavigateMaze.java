@@ -17,7 +17,7 @@ public class NavigateMaze extends AbstractNavigate {
     /**
      * Creates a Maze object with a null parent.
      *
-     * @param maze the maze being navigated
+     * @param maze       the maze being navigated
      * @param currentRow the row of the current position
      * @param currentCol the column of the current position
      */
@@ -28,7 +28,7 @@ public class NavigateMaze extends AbstractNavigate {
     /**
      * Creates a Maze object with parent.
      *
-     * @param maze the maze being navigated
+     * @param maze       the maze being navigated
      * @param currentRow the row of the current position
      * @param currentCol the column of the current position
      * @param parentMaze the parent of the new maze
@@ -49,19 +49,19 @@ public class NavigateMaze extends AbstractNavigate {
         List<AbstractAStarNode> possibleMoves = new ArrayList<>();
 
         // Move Up
-        if(this.getState()[0] - 1 >= 0 && this.getEnvironment()[this.getState()[0] - 1][this.getState()[1]] != 0)
+        if (this.getState()[0] - 1 >= 0 && this.getEnvironment()[this.getState()[0] - 1][this.getState()[1]] != 0)
             possibleMoves.add(new NavigateMaze(this.getEnvironment(), this.getState()[0] - 1, this.getState()[1], this));
 
         // Move Down
-        if(this.getState()[0] + 1 < super.getNumberOfRows() && this.getEnvironment()[this.getState()[0] + 1][this.getState()[1]] != 0)
-            possibleMoves.add(new NavigateMaze(this.getEnvironment(), this.getState()[0]+ 1, this.getState()[1], this));
+        if (this.getState()[0] + 1 < super.getNumberOfRows() && this.getEnvironment()[this.getState()[0] + 1][this.getState()[1]] != 0)
+            possibleMoves.add(new NavigateMaze(this.getEnvironment(), this.getState()[0] + 1, this.getState()[1], this));
 
         // Move Left
-        if(this.getState()[1] - 1 >= 0 && this.getEnvironment()[this.getState()[0]][this.getState()[1] - 1] != 0)
-            possibleMoves.add(new NavigateMaze(this.getEnvironment(), this.getState()[0], this.getState()[1] -1, this));
+        if (this.getState()[1] - 1 >= 0 && this.getEnvironment()[this.getState()[0]][this.getState()[1] - 1] != 0)
+            possibleMoves.add(new NavigateMaze(this.getEnvironment(), this.getState()[0], this.getState()[1] - 1, this));
 
         //Move Right
-        if(this.getState()[1] + 1 < super.getNumberOfCols() && this.getEnvironment()[this.getState()[0]][this.getState()[1] + 1] != 0)
+        if (this.getState()[1] + 1 < super.getNumberOfCols() && this.getEnvironment()[this.getState()[0]][this.getState()[1] + 1] != 0)
             possibleMoves.add(new NavigateMaze(this.getEnvironment(), this.getState()[0], this.getState()[1] + 1, this));
 
         return possibleMoves;
@@ -82,7 +82,7 @@ public class NavigateMaze extends AbstractNavigate {
 
         int[][] maze = {
                 {1, 0, 0, 0, 1},
-                {1 ,0, 1, 0, 1},
+                {1, 0, 1, 0, 1},
                 {1, 0, 1, 0, 1},
                 {1, 0, 1, 0, 1},
                 {1, 1, 1, 1, 1}};

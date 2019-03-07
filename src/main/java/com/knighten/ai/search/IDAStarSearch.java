@@ -17,8 +17,8 @@ public class IDAStarSearch {
     /**
      * Creates an IDAStarSearch object with initial state, goal state, and a heuristic function.
      *
-     * @param initialState the state where the search begins
-     * @param goalState the state where the search ends
+     * @param initialState      the state where the search begins
+     * @param goalState         the state where the search ends
      * @param heuristicFunction the heuristic function used to score nodes
      */
     public IDAStarSearch(AbstractAStarNode initialState, AbstractAStarNode goalState,
@@ -29,20 +29,20 @@ public class IDAStarSearch {
     }
 
     /**
-     *  Begins the IDA* search. Will return null if the goal node cannot be found. Returns a AbstractAStarNode that
-     *  is the last node on the optimal path. You can traverse the optimal path by following each nodes parent
-     *  until you arrive back to the initial node(parent is null).
+     * Begins the IDA* search. Will return null if the goal node cannot be found. Returns a AbstractAStarNode that
+     * is the last node on the optimal path. You can traverse the optimal path by following each nodes parent
+     * until you arrive back to the initial node(parent is null).
      *
      * @return null if path does not exist, otherwise the last node on the optimal path
      */
     public AbstractAStarNode search() {
 
         // Find Initial F Bound
-        double currentFBound = this.heuristicFunction.calculateHeuristic(initialState);
+        double currentFBound = this.heuristicFunction.calculateHeuristic(this.initialState);
 
         // Set Root of Path To Initial Node
         ArrayList<AbstractAStarNode> path = new ArrayList<>();
-        path.add(0, initialState);
+        path.add(0, this.initialState);
 
         // Keep Retrying With Larger F Bound Until One Of The Follow:
         // 0 Is Returned     - The Goal Node Is Found So Path Contains Optimal Path
@@ -53,12 +53,12 @@ public class IDAStarSearch {
             smallestNewFBound = recur_search(path, 0, currentFBound);
 
             // Check If Goal Node Was Found
-            if(smallestNewFBound == 0.0)
-                return path.get(path.size()-1);
+            if (smallestNewFBound == 0.0)
+                return path.get(path.size() - 1);
 
             // Set New F Boundary
             currentFBound = smallestNewFBound;
-        } while(currentFBound != Double.MAX_VALUE);
+        } while (currentFBound != Double.MAX_VALUE);
 
         return null;
     }
@@ -70,25 +70,25 @@ public class IDAStarSearch {
      * return 0 if goal node is found and Integer.MAX_VALUE if there is not a single path with a f greater than the
      * f boundary, meaning the goal node cannot be found.
      *
-     * @param path list of nodes ordered by the order they were visited
-     * @param graphCost current graph cost to get to the current node
+     * @param path          list of nodes ordered by the order they were visited
+     * @param graphCost     current graph cost to get to the current node
      * @param currentFBound the max f boundary for current iteration
      * @return the smallest f value in the iteration that was greater than the fBoundary for the iteration
      */
     private double recur_search(ArrayList<AbstractAStarNode> path, double graphCost, double currentFBound) {
 
         // Set G, H, and F of Current Node
-        AbstractAStarNode currentNode = path.get(path.size()-1);
+        AbstractAStarNode currentNode = path.get(path.size() - 1);
         currentNode.setH(this.heuristicFunction.calculateHeuristic(currentNode));
         currentNode.setG(graphCost);
         currentNode.setF(graphCost + currentNode.getH());
 
         // Current Node Has F Larger Than Current Bound
-        if(currentNode.getF() > currentFBound)
+        if (currentNode.getF() > currentFBound)
             return currentNode.getF();
 
         // Found The Goal Node -> Send Signal To End Recursion
-        if(currentNode.equals(goalState))
+        if (currentNode.equals(this.goalState))
             return 0;
 
         // If This Stays Integer.MAX_VALUE Then All Paths Explored Were Smaller Than F Bound
@@ -96,25 +96,25 @@ public class IDAStarSearch {
 
         List<AbstractAStarNode> children = currentNode.getSuccessors();
         // Expand Search To Each Child Node
-        for(AbstractAStarNode child: children) {
+        for (AbstractAStarNode child : children) {
 
             // Verify Child Node Is Not Already On The Current Search Path
-            if(!path.contains(child)) {
+            if (!path.contains(child)) {
 
                 // Add Child Tp Path And Then Continue Search Down The Path
                 path.add(child);
                 double minFOverBound = recur_search(path, currentNode.getG() + child.distFromParent(), currentFBound);
 
                 // Signals To End Recursion When Goal Is Found
-                if(minFOverBound == 0.0)
+                if (minFOverBound == 0.0)
                     return 0.0;
 
                 // Keep Track Of The Smallest F Found Over Bound Generated By Each Child's Search Path
-                if(minFOverBound < minFFound)
+                if (minFOverBound < minFFound)
                     minFFound = minFOverBound;
 
                 // Remove Child From Search Path Before Exploring Next Child
-                path.remove(path.size()-1);
+                path.remove(path.size() - 1);
             }
         }
 
@@ -132,7 +132,7 @@ public class IDAStarSearch {
         ArrayList<AbstractAStarNode> path = new ArrayList<>();
         path.add(endPathNode);
 
-        while(endPathNode.getParent() != null) {
+        while (endPathNode.getParent() != null) {
             path.add(0, endPathNode.getParent());
             endPathNode = endPathNode.getParent();
         }

@@ -13,7 +13,6 @@ import java.util.List;
  */
 public class ThreePuzzle extends AbstractNPuzzle {
 
-
     /**
      * Creates a state representation for the three-puzzle problem. Zero is used to represent the empty space. Useful
      * for representing the initial and goal states. This will also find the location of the empty space on the board.
@@ -22,20 +21,20 @@ public class ThreePuzzle extends AbstractNPuzzle {
      */
     public ThreePuzzle(int[] puzzleBoard) {
 
-        if(puzzleBoard == null)
+        if (puzzleBoard == null)
             throw new IllegalArgumentException("3Puzzle Board's Cannot Be Null");
 
-        if(puzzleBoard.length != 4)
+        if (puzzleBoard.length != 4)
             throw new IllegalArgumentException("3Puzzle Board's Must Have 4 Spaces(Array Length of 4)");
 
         this.setState(puzzleBoard);
 
         // Find Location of The Empty Space aka 0
-        for(int currentSpace = 0; currentSpace < puzzleBoard.length; currentSpace++)
-            if(puzzleBoard[currentSpace] == 0)
+        for (int currentSpace = 0; currentSpace < puzzleBoard.length; currentSpace++)
+            if (puzzleBoard[currentSpace] == 0)
                 this.setEmptySpaceLocation(currentSpace);
 
-        if(this.getEmptySpaceLocation() == -1)
+        if (this.getEmptySpaceLocation() == -1)
             throw new IllegalArgumentException("All NPuzzle Boards Most Contain an Empty Space(0 Must Be In The Array)");
     }
 
@@ -51,7 +50,6 @@ public class ThreePuzzle extends AbstractNPuzzle {
         this.setParent(parentPuzzle);
     }
 
-
     /**
      * Returns the successor states for the current search node. Attempts to move tiles into the empty space to create
      * new states.
@@ -63,13 +61,13 @@ public class ThreePuzzle extends AbstractNPuzzle {
         ArrayList<Integer> possibleNextMoves = new ArrayList<>();
 
         // Check If Empty Space Is In Top Left Or Bottom Right
-        if(this.getEmptySpaceLocation() == 0 || this.getEmptySpaceLocation() == 3) {
+        if (this.getEmptySpaceLocation() == 0 || this.getEmptySpaceLocation() == 3) {
             possibleNextMoves.add(1);
             possibleNextMoves.add(2);
         }
 
         // Check If Empty Space Is In Top Right Or Bottom Left
-        if(this.getEmptySpaceLocation() == 1 || this.getEmptySpaceLocation() == 2) {
+        if (this.getEmptySpaceLocation() == 1 || this.getEmptySpaceLocation() == 2) {
             possibleNextMoves.add(0);
             possibleNextMoves.add(3);
         }
@@ -77,7 +75,7 @@ public class ThreePuzzle extends AbstractNPuzzle {
         // Create List of All Successor States
         ArrayList<AbstractAStarNode> successors = new ArrayList<>();
         int[] successorBoard;
-        for(Integer nextSpace: possibleNextMoves){
+        for (Integer nextSpace : possibleNextMoves) {
             successorBoard = Arrays.copyOf(this.getState(), this.getState().length);
             successorBoard[this.getEmptySpaceLocation()] = this.getState()[nextSpace];
             successorBoard[nextSpace] = 0;
@@ -109,7 +107,7 @@ public class ThreePuzzle extends AbstractNPuzzle {
 
         List<AbstractAStarNode> path = searcher.getPath(finalSearchNode);
         int step = 1;
-        for(AbstractAStarNode node: path) {
+        for (AbstractAStarNode node : path) {
             System.out.println("Step " + step);
             System.out.println(node);
             step++;

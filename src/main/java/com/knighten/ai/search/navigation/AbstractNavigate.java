@@ -40,8 +40,8 @@ public abstract class AbstractNavigate extends AbstractAStarNode<int[]> {
      * environment to set numberOfRows and numberOfCols.
      *
      * @param environment the area being navigated
-     * @param currentRow the current row position
-     * @param currentCol the current column position
+     * @param currentRow  the current row position
+     * @param currentCol  the current column position
      */
     public AbstractNavigate(int[][] environment, int currentRow, int currentCol) {
         this.environment = environment;
@@ -99,7 +99,7 @@ public abstract class AbstractNavigate extends AbstractAStarNode<int[]> {
      */
     @Override
     public boolean equals(Object otherMaze) {
-        if(otherMaze instanceof AbstractNavigate) {
+        if (otherMaze instanceof AbstractNavigate) {
             return Arrays.equals(((AbstractNavigate) otherMaze).getState(), this.getState());
         }
 
@@ -116,17 +116,17 @@ public abstract class AbstractNavigate extends AbstractAStarNode<int[]> {
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
-        for(int row = 0; row < this.numberOfRows; row++) {
-            for(int column = 0; column < this.numberOfCols; column++) {
+        for (int row = 0; row < this.numberOfRows; row++) {
+            for (int column = 0; column < this.numberOfCols; column++) {
 
-                if(row == this.currentRow && column == this.currentCol)
+                if (row == this.currentRow && column == this.currentCol)
                     builder.append("* ");
                 else
                     builder.append(Integer.toString(this.environment[row][column]) + ' ');
 
             }
 
-            if(row != (this.numberOfRows - 1))
+            if (row != (this.numberOfRows - 1))
                 builder.append('\n');
         }
 

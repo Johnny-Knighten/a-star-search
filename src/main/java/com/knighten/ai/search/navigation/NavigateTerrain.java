@@ -20,7 +20,7 @@ public class NavigateTerrain extends AbstractNavigate {
     /**
      * Creates a NavigateTerrain object with a null parent.
      *
-     * @param terrain the terrain being navigated
+     * @param terrain    the terrain being navigated
      * @param currentRow the row of the current position
      * @param currentCol the column of the current position
      */
@@ -31,7 +31,7 @@ public class NavigateTerrain extends AbstractNavigate {
     /**
      * Creates a NavigateTerrain object with parent.
      *
-     * @param terrain the maze being navigated
+     * @param terrain    the maze being navigated
      * @param currentRow the row of the current position
      * @param currentCol the column of the current position
      * @param parentMaze the parent of the new maze
@@ -52,19 +52,19 @@ public class NavigateTerrain extends AbstractNavigate {
         List<AbstractAStarNode> possibleMoves = new ArrayList<>();
 
         // Move Up
-        if(this.getState()[0] - 1 >= 0 && this.getEnvironment()[this.getState()[0] - 1][this.getState()[1]] != 0)
+        if (this.getState()[0] - 1 >= 0 && this.getEnvironment()[this.getState()[0] - 1][this.getState()[1]] != 0)
             possibleMoves.add(new NavigateTerrain(this.getEnvironment(), this.getState()[0] - 1, this.getState()[1], this));
 
         // Move Down
-        if(this.getState()[0] + 1 < super.getNumberOfRows() && this.getEnvironment()[this.getState()[0] + 1][this.getState()[1]] != 0)
+        if (this.getState()[0] + 1 < super.getNumberOfRows() && this.getEnvironment()[this.getState()[0] + 1][this.getState()[1]] != 0)
             possibleMoves.add(new NavigateTerrain(this.getEnvironment(), this.getState()[0] + 1, this.getState()[1], this));
 
         // Move Left
-        if(this.getState()[1] - 1 >= 0 && this.getEnvironment()[this.getState()[0]][this.getState()[1] - 1] != 0)
+        if (this.getState()[1] - 1 >= 0 && this.getEnvironment()[this.getState()[0]][this.getState()[1] - 1] != 0)
             possibleMoves.add(new NavigateTerrain(this.getEnvironment(), this.getState()[0], this.getState()[1] - 1, this));
 
         //Move Right
-        if(this.getState()[1] + 1 < super.getNumberOfCols() && this.getEnvironment()[this.getState()[0]][this.getState()[1] + 1] != 0)
+        if (this.getState()[1] + 1 < super.getNumberOfCols() && this.getEnvironment()[this.getState()[0]][this.getState()[1] + 1] != 0)
             possibleMoves.add(new NavigateTerrain(this.getEnvironment(), this.getState()[0], this.getState()[1] + 1, this));
 
         return possibleMoves;
@@ -80,7 +80,6 @@ public class NavigateTerrain extends AbstractNavigate {
     public double distFromParent() {
         return this.getEnvironment()[this.getState()[0]][this.getState()[1]];
     }
-
 
     public static void main(String[] args) {
 

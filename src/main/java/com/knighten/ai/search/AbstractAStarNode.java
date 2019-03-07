@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @param <T> the type of the node's stored state
  */
-public abstract class AbstractAStarNode<T> implements Comparator<AbstractAStarNode<T>>{
+public abstract class AbstractAStarNode<T> implements Comparator<AbstractAStarNode<T>> {
 
     /**
      * Node's h() heuristic value.
@@ -36,12 +36,14 @@ public abstract class AbstractAStarNode<T> implements Comparator<AbstractAStarNo
     private T state;
 
     /**
-     *  Returns the heuristic score h() for the node. You MUST call calcH() before attempting to retrieve the heuristic
-     *  score, otherwise h() = Integer.MIN_VALUE.
+     * Returns the heuristic score h() for the node. You MUST call calcH() before attempting to retrieve the heuristic
+     * score, otherwise h() = Integer.MIN_VALUE.
      *
      * @return the heuristic score h() for the node
      */
-    public double getH() {return this.hScore;}
+    public double getH() {
+        return this.hScore;
+    }
 
     /**
      * Sets the node's heuristic score h(). Get h() from A IHeuristicFunction object then store the value using this
@@ -49,35 +51,45 @@ public abstract class AbstractAStarNode<T> implements Comparator<AbstractAStarNo
      *
      * @param hScore the heuristic score h() of the node
      */
-    public void setH(double hScore) {this.hScore = hScore;}
+    public void setH(double hScore) {
+        this.hScore = hScore;
+    }
 
     /**
      * Returns the graph link score g(). The total path cost accumulated so far to reach current node.
      *
-     * @return  returns graph link score g()
+     * @return returns graph link score g()
      */
-    public double getG() {return this.gScore;}
+    public double getG() {
+        return this.gScore;
+    }
 
     /**
      * Set the node's path cost g(). The total path cost accumulated so far to reach current node.
      *
-     * @param  gScore the node's path cost g()
+     * @param gScore the node's path cost g()
      */
-    public void setG(double gScore) {this.gScore = gScore;}
+    public void setG(double gScore) {
+        this.gScore = gScore;
+    }
 
     /**
      * Gets the node's parents. Initial nodes should have parent equal to NULL.
      *
      * @return returns the node's parent
      */
-    public AbstractAStarNode getParent() {return this.parent;}
+    public AbstractAStarNode getParent() {
+        return this.parent;
+    }
 
     /**
      * Sets the node's parent. Initial nodes should have parent equal to NULL.
      *
      * @param parent the node's parent
      */
-    public void setParent(AbstractAStarNode parent) {this.parent = parent;}
+    public void setParent(AbstractAStarNode parent) {
+        this.parent = parent;
+    }
 
     /**
      * Returns the f() value of the node. Note it does not do the f() calculation you must store it in the node using
@@ -85,35 +97,43 @@ public abstract class AbstractAStarNode<T> implements Comparator<AbstractAStarNo
      *
      * @return the f() value of the node
      */
-    public double getF() {return this.fScore;}
+    public double getF() {
+        return this.fScore;
+    }
 
     /**
      * Sets the node's f() value.
      *
      * @param fScore the f() value of the node
      */
-    public void setF(double fScore) {this.fScore = fScore;}
+    public void setF(double fScore) {
+        this.fScore = fScore;
+    }
 
     /**
      * Returns the node's state
      *
      * @return the node's state
      */
-    public T getState() {return this.state;}
+    public T getState() {
+        return this.state;
+    }
 
     /**
      * Sets the node's state.
      *
      * @param state the state of the node
      */
-    public void setState(T state) {this.state = state;}
+    public void setState(T state) {
+        this.state = state;
+    }
 
     /**
      * Compares two AStarNodes' f() values. Used in priority queue.
      *
      * @param node1 a AbstractAStarNode - treated as primary
      * @param node2 another AbstractAStarNode - treated as secondary
-     * @return  negative if node1 LT node2; zero if node1==node2; positive if node1 GT node2;
+     * @return negative if node1 LT node2; zero if node1==node2; positive if node1 GT node2;
      */
     @Override
     public int compare(AbstractAStarNode<T> node1, AbstractAStarNode<T> node2) {

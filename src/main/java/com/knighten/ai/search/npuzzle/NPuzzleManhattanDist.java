@@ -8,16 +8,23 @@ import com.knighten.ai.search.interfaces.IHeuristicFunction;
  */
 public class NPuzzleManhattanDist implements IHeuristicFunction {
 
+    /**
+     * The goal node used in every heuristic value calculation.
+     */
     private AbstractAStarNode goalNode;
 
+    /**
+     * Creates the manhattan distance heuristic function for n puzzles.
+     *
+     * @param goalNode goal node used in every heuristic value calculation
+     */
     public NPuzzleManhattanDist(AbstractAStarNode goalNode) {
 
-        if(goalNode == null)
+        if (goalNode == null)
             throw new IllegalArgumentException("Goal Node Cannot Be Null");
 
         this.goalNode = goalNode;
     }
-
 
     /**
      * Calculates the manhattan distance between two NPuzzles. For each position of search board we find how far
@@ -32,7 +39,7 @@ public class NPuzzleManhattanDist implements IHeuristicFunction {
     @Override
     public double calculateHeuristic(AbstractAStarNode searchNode) {
 
-        if(searchNode == null)
+        if (searchNode == null)
             throw new IllegalArgumentException("Search Node Cannot Be Null");
 
         int[] goalBoard = (int[]) this.goalNode.getState();
@@ -41,16 +48,16 @@ public class NPuzzleManhattanDist implements IHeuristicFunction {
         int rowLength = (int) Math.sqrt(goalBoard.length);
 
         int score = 0;
-        for(int goalBoardPosition=0; goalBoardPosition<flatBoardLength; goalBoardPosition++) {
+        for (int goalBoardPosition = 0; goalBoardPosition < flatBoardLength; goalBoardPosition++) {
 
             // Empty Space Not Part Of Heuristic Calculation
-            if(goalBoard[goalBoardPosition] == 0)
+            if (goalBoard[goalBoardPosition] == 0)
                 continue;
 
             // Find Position In Search Board That Matches The Current Goal Board Position
             int matchingSpaceOnCurrentNode = 0;
-            for(int currentNodePosition=0; currentNodePosition<flatBoardLength; currentNodePosition++)
-                if(goalBoard[goalBoardPosition] == currentBoard[currentNodePosition])
+            for (int currentNodePosition = 0; currentNodePosition < flatBoardLength; currentNodePosition++)
+                if (goalBoard[goalBoardPosition] == currentBoard[currentNodePosition])
                     matchingSpaceOnCurrentNode = currentNodePosition;
 
             // Convert One Dimensional Index To Two Dimensional Indices

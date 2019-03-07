@@ -32,7 +32,7 @@ public abstract class AbstractNPuzzle extends AbstractAStarNode<int[]> {
      */
     public void setEmptySpaceLocation(int emptySpaceLocation) {
 
-        if(emptySpaceLocation < 0 || emptySpaceLocation > (this.getState().length-1))
+        if (emptySpaceLocation < 0 || emptySpaceLocation > (this.getState().length - 1))
             throw new IllegalArgumentException("The Empty Space Location Must Be Between 0 And N");
 
         this.emptySpaceLocation = emptySpaceLocation;
@@ -45,7 +45,9 @@ public abstract class AbstractNPuzzle extends AbstractAStarNode<int[]> {
      * @return distance from parent to node - always 1
      */
     @Override
-    public double distFromParent() {return 1;}
+    public double distFromParent() {
+        return 1;
+    }
 
     /**
      * Returns the hash code for the puzzle board. Only compares state, so a AbstractNPuzzle's with the same board
@@ -54,18 +56,20 @@ public abstract class AbstractNPuzzle extends AbstractAStarNode<int[]> {
      * @return hash code for puzzle
      */
     @Override
-    public int hashCode() {return Arrays.hashCode(this.getState());}
+    public int hashCode() {
+        return Arrays.hashCode(this.getState());
+    }
 
     /**
      * Determines if two puzzles are equal to one another. Puzzles are equal if their boards(state) are equal to each
      * other. f(),h(), or g() are not taken into consideration for equality. This must match the hash function.
      *
-     * @return  true if puzzles(state) are equal and false if not
+     * @return true if puzzles(state) are equal and false if not
      */
     @Override
     public boolean equals(Object otherPuzzle) {
 
-        if(otherPuzzle instanceof AbstractNPuzzle) {
+        if (otherPuzzle instanceof AbstractNPuzzle) {
             return Arrays.equals(((AbstractNPuzzle) otherPuzzle).getState(), this.getState());
         }
 
@@ -84,9 +88,9 @@ public abstract class AbstractNPuzzle extends AbstractAStarNode<int[]> {
 
         int[] nodesBoard = this.getState();
         int rowLength = (int) Math.sqrt(nodesBoard.length);
-        for(int currentPosition=0; currentPosition<nodesBoard.length; currentPosition++) {
+        for (int currentPosition = 0; currentPosition < nodesBoard.length; currentPosition++) {
             String space = (nodesBoard[currentPosition] == 0) ? "*" : Integer.toString(nodesBoard[currentPosition]);
-            String charAfterSpace = (currentPosition % rowLength == (rowLength-1)) ? "\n" : " ";
+            String charAfterSpace = (currentPosition % rowLength == (rowLength - 1)) ? "\n" : " ";
             stringBuilder.append(space);
             stringBuilder.append(charAfterSpace);
         }

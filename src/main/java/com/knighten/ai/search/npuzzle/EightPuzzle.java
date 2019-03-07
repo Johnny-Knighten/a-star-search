@@ -20,22 +20,22 @@ public class EightPuzzle extends AbstractNPuzzle {
      *
      * @param puzzleBoard array of ints representing the puzzle board
      */
-    public EightPuzzle(int[] puzzleBoard)  {
+    public EightPuzzle(int[] puzzleBoard) {
 
-        if(puzzleBoard == null)
+        if (puzzleBoard == null)
             throw new IllegalArgumentException("8Puzzle Board's Cannot Be Null");
 
-        if(puzzleBoard.length != 9)
+        if (puzzleBoard.length != 9)
             throw new IllegalArgumentException("8Puzzle Board's Must Have 9 Spaces(Array Length of 9)");
 
         this.setState(puzzleBoard);
 
         // Find Location of The Empty Space aka 0
-        for(int currentSpace=0; currentSpace<puzzleBoard.length; currentSpace++)
-            if(puzzleBoard[currentSpace] == 0)
+        for (int currentSpace = 0; currentSpace < puzzleBoard.length; currentSpace++)
+            if (puzzleBoard[currentSpace] == 0)
                 this.setEmptySpaceLocation(currentSpace);
 
-        if(this.getEmptySpaceLocation() == -1)
+        if (this.getEmptySpaceLocation() == -1)
             throw new IllegalArgumentException("All NPuzzle Boards Most Contain an Empty Space(0 Must Be In The Array)");
     }
 
@@ -51,7 +51,6 @@ public class EightPuzzle extends AbstractNPuzzle {
         this.setParent(parentPuzzle);
     }
 
-
     /**
      * Returns the successor states for the current search node. Attempts to move tiles into the empty space to create
      * new states.
@@ -63,25 +62,25 @@ public class EightPuzzle extends AbstractNPuzzle {
         ArrayList<Integer> possibleNextMoves = new ArrayList<>();
 
         // Check Moving Empty Space Left
-        if(((this.getEmptySpaceLocation() - 1) >= 0) && (this.getEmptySpaceLocation() % 3 != 0))
+        if (((this.getEmptySpaceLocation() - 1) >= 0) && (this.getEmptySpaceLocation() % 3 != 0))
             possibleNextMoves.add(this.getEmptySpaceLocation() - 1);
 
         // Check Moving Empty Space Right
-        if(((this.getEmptySpaceLocation() + 1) < 9) && (this.getEmptySpaceLocation() % 3 != 2))
+        if (((this.getEmptySpaceLocation() + 1) < 9) && (this.getEmptySpaceLocation() % 3 != 2))
             possibleNextMoves.add(this.getEmptySpaceLocation() + 1);
 
         // Check Moving Empty Space Up
-        if(((this.getEmptySpaceLocation() - 3) >= 0) && (this.getEmptySpaceLocation() / 3 != 0))
+        if (((this.getEmptySpaceLocation() - 3) >= 0) && (this.getEmptySpaceLocation() / 3 != 0))
             possibleNextMoves.add(this.getEmptySpaceLocation() - 3);
 
         // Check Moving Empty Space Down
-        if(((this.getEmptySpaceLocation() + 3) < 9) && (this.getEmptySpaceLocation() / 3 != 2))
+        if (((this.getEmptySpaceLocation() + 3) < 9) && (this.getEmptySpaceLocation() / 3 != 2))
             possibleNextMoves.add(this.getEmptySpaceLocation() + 3);
 
         // Create List of All Successor States
         ArrayList<AbstractAStarNode> successors = new ArrayList<>();
         int[] successorBoard;
-        for(Integer nextSpace: possibleNextMoves){
+        for (Integer nextSpace : possibleNextMoves) {
             successorBoard = Arrays.copyOf(this.getState(), this.getState().length);
             successorBoard[this.getEmptySpaceLocation()] = this.getState()[nextSpace];
             successorBoard[nextSpace] = 0;

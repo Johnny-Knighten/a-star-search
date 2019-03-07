@@ -21,8 +21,8 @@ public class AStarSearch {
     /**
      * Creates an AStarSearch object with initial state, goal state, and a heuristic function.
      *
-     * @param initialState the state where the search begins
-     * @param goalState the state where the search ends
+     * @param initialState      the state where the search begins
+     * @param goalState         the state where the search ends
      * @param heuristicFunction the heuristic function used to score nodes
      */
     public AStarSearch(AbstractAStarNode initialState, AbstractAStarNode goalState,
@@ -33,9 +33,9 @@ public class AStarSearch {
     }
 
     /**
-     *  Begins the A* search. Will return null if the goal node cannot be found. Returns a AbstractAStarNode that
-     *  is the last node on the optimal path. You can traverse the optimal path by following each nodes parent
-     *  until you arrive back to the initial node(parent is null).
+     * Begins the A* search. Will return null if the goal node cannot be found. Returns a AbstractAStarNode that
+     * is the last node on the optimal path. You can traverse the optimal path by following each nodes parent
+     * until you arrive back to the initial node(parent is null).
      *
      * @return null if path does not exist, otherwise the last node on the optimal path
      */
@@ -47,27 +47,27 @@ public class AStarSearch {
         HashSet<AbstractAStarNode> closedSet = new HashSet<>();
 
         // Set Initial Nodes F To Heuristic Score
-        initialState.setF(this.heuristicFunction.calculateHeuristic(this.initialState));
+        this.initialState.setF(this.heuristicFunction.calculateHeuristic(this.initialState));
 
         // Add Initial Node Into Queue/HashMap
-        openSet.add(initialState);
-        openSetHash.put(initialState, initialState.getF());
+        openSet.add(this.initialState);
+        openSetHash.put(this.initialState, this.initialState.getF());
 
-        while(!openSet.isEmpty()) {
+        while (!openSet.isEmpty()) {
             AbstractAStarNode currentState = openSet.poll();
 
             // Check If Goal Is Found
-            if(currentState.equals(goalState))
+            if (currentState.equals(this.goalState))
                 return currentState;
 
             // Add To Closed Set Since We Have Generated The Nodes Successors
             closedSet.add(currentState);
             List<AbstractAStarNode> childrenStates = currentState.getSuccessors();
 
-            for(AbstractAStarNode childState: childrenStates) {
+            for (AbstractAStarNode childState : childrenStates) {
 
                 // If Child Node's Children Has Already Been Generated Then Skip Child
-                if(closedSet.contains(childState))
+                if (closedSet.contains(childState))
                     continue;
 
                 childState.setG(childState.getParent().getG() + childState.distFromParent());
@@ -76,7 +76,7 @@ public class AStarSearch {
 
                 // If Child Node Is In Queue And The Version In Queue Has A Smaller F() Then Do Not Add The Child To Queue
                 // Note the short circuit logic
-                if(openSetHash.containsKey(childState) && openSetHash.get(childState) < childState.getF())
+                if (openSetHash.containsKey(childState) && openSetHash.get(childState) < childState.getF())
                     continue;
 
                 openSet.add(childState);
@@ -98,7 +98,7 @@ public class AStarSearch {
         ArrayList<AbstractAStarNode> path = new ArrayList<>();
         path.add(endPathNode);
 
-        while(endPathNode.getParent() != null) {
+        while (endPathNode.getParent() != null) {
             path.add(0, endPathNode.getParent());
             endPathNode = endPathNode.getParent();
         }
