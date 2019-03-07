@@ -14,7 +14,7 @@ public class EightPuzzleTests {
     private int[] puzzleBoardSolution;
     private int[] puzzleBoardNoZero;
     private int[] puzzleBoardInvalidLength;
-    private int[] middlEmpty;
+    private int[] middleEmpty;
     private int[] middleLeftEmpty;
     private int[] middleRightEmpty;
     private int[] topMiddleEmpty;
@@ -34,7 +34,7 @@ public class EightPuzzleTests {
 
         mockParentNode = Mockito.mock(EightPuzzle.class);
 
-        middlEmpty = new int[]{1, 2, 3, 4, 0, 5, 6, 7, 8};
+        middleEmpty = new int[]{1, 2, 3, 4, 0, 5, 6, 7, 8};
         middleLeftEmpty = new int[]{1, 2, 3, 0, 4, 5, 6, 7, 8};
         middleRightEmpty = new int[]{1, 2, 3, 4, 5, 0, 6, 7, 8};
         topMiddleEmpty = new int[]{1, 0, 2, 3, 4, 5, 6, 7, 8};
@@ -69,15 +69,15 @@ public class EightPuzzleTests {
     ////////////////////
 
     @Test
-    public void constructorNoParentNode() throws Exception {
+    public void constructorNoParentNode() {
         EightPuzzle newPuzzle = new EightPuzzle(puzzleBoardSolution);
 
         Assert.assertArrayEquals(puzzleBoardSolution, newPuzzle.getState());
-        Assert.assertEquals(null, newPuzzle.getParent());
+        Assert.assertNull(newPuzzle.getParent());
     }
 
     @Test
-    public void createNodeWithParentNode() throws Exception {
+    public void createNodeWithParentNode() {
         EightPuzzle newPuzzle = new EightPuzzle(puzzleBoardSolution, mockParentNode);
 
         Assert.assertArrayEquals(puzzleBoardSolution, newPuzzle.getState());
@@ -85,8 +85,8 @@ public class EightPuzzleTests {
     }
 
     @Test
-    public void createSuccessorsWithMiddleEmpty() throws Exception{
-        EightPuzzle parentPuzzle = new EightPuzzle(middlEmpty);
+    public void createSuccessorsWithMiddleEmpty() {
+        EightPuzzle parentPuzzle = new EightPuzzle(middleEmpty);
         ArrayList<AbstractAStarNode> successors = parentPuzzle.getSuccessors();
 
         Assert.assertEquals(4, successors.size());
@@ -97,7 +97,7 @@ public class EightPuzzleTests {
     }
 
     @Test
-    public void createSuccessorsWithMiddleLeftEmpty() throws Exception{
+    public void createSuccessorsWithMiddleLeftEmpty() {
         EightPuzzle parentPuzzle = new EightPuzzle(middleLeftEmpty);
         ArrayList<AbstractAStarNode> successors = parentPuzzle.getSuccessors();
 
@@ -108,7 +108,7 @@ public class EightPuzzleTests {
     }
 
     @Test
-    public void createSuccessorsWithMiddleRightEmpty() throws Exception{
+    public void createSuccessorsWithMiddleRightEmpty() {
         EightPuzzle parentPuzzle = new EightPuzzle(middleRightEmpty);
         ArrayList<AbstractAStarNode> successors = parentPuzzle.getSuccessors();
 
@@ -119,7 +119,7 @@ public class EightPuzzleTests {
     }
 
     @Test
-    public void createSuccessorsWithTopMiddleEmpty() throws Exception{
+    public void createSuccessorsWithTopMiddleEmpty() {
         EightPuzzle parentPuzzle = new EightPuzzle(topMiddleEmpty);
         ArrayList<AbstractAStarNode> successors = parentPuzzle.getSuccessors();
 
@@ -130,7 +130,7 @@ public class EightPuzzleTests {
     }
 
     @Test
-    public void createSuccessorsWithTopLeftEmpty() throws Exception{
+    public void createSuccessorsWithTopLeftEmpty() {
         EightPuzzle parentPuzzle = new EightPuzzle(topLeftEmpty);
         ArrayList<AbstractAStarNode> successors = parentPuzzle.getSuccessors();
 
@@ -140,7 +140,7 @@ public class EightPuzzleTests {
     }
 
     @Test
-    public void createSuccessorsWithTopRightEmpty() throws Exception{
+    public void createSuccessorsWithTopRightEmpty() {
         EightPuzzle parentPuzzle = new EightPuzzle(topRightEmpty);
         ArrayList<AbstractAStarNode> successors = parentPuzzle.getSuccessors();
 
@@ -150,7 +150,7 @@ public class EightPuzzleTests {
     }
 
     @Test
-    public void createSuccessorsWithBottomMiddleEmpty() throws Exception{
+    public void createSuccessorsWithBottomMiddleEmpty() {
         EightPuzzle parentPuzzle = new EightPuzzle(bottomMiddleEmpty);
         ArrayList<AbstractAStarNode> successors = parentPuzzle.getSuccessors();
 
@@ -161,7 +161,7 @@ public class EightPuzzleTests {
     }
 
     @Test
-    public void createSuccessorsWithBottomLeftEmpty() throws Exception{
+    public void createSuccessorsWithBottomLeftEmpty() {
         EightPuzzle parentPuzzle = new EightPuzzle(bottomLeftEmpty);
         ArrayList<AbstractAStarNode> successors = parentPuzzle.getSuccessors();
 
@@ -171,7 +171,7 @@ public class EightPuzzleTests {
     }
 
     @Test
-    public void createSuccessorsWithBottomRightEmpty() throws Exception{
+    public void createSuccessorsWithBottomRightEmpty() {
         EightPuzzle parentPuzzle = new EightPuzzle(bottomRightEmpty);
         ArrayList<AbstractAStarNode> successors = parentPuzzle.getSuccessors();
 
