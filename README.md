@@ -36,32 +36,32 @@ The javadocs can be found in /build/docs/javadoc/.
 ## High Level Overview Of Using The Framework
 
 The AStarSearch and IDAStarSearch classes are responsible for performing state space searches using the algorithm they
-are respectively named after. Both classes must be provided an initial state and a goal state, which are instances of a
-class that extends AbstractStarNode. The AbstractAStarNode class uses a generic that is the state 
-representation of the node. AbstractAStarNode contains methods for getting/setting a nodes graph cost(g),
-heuristic score(h), total score(f), state representation, and parent node. Classes that extend AbstractAStarNode must
-implement methods that generate successor nodes, calculates the search graph distance from the nodes parent,
-generate a hash code, and an equals method that is based on the node's state representation. Essentially a state
-space search problem must be represented by a class that extends AbstractAStarNode.
+are respectively named after. Both classes must be provided an initial state, a goal state, and a heuristic function. 
+The initial and goal states are instances of a class that extends  AbstractAStarNode. The AbstractAStarNode class uses a 
+generic that represents the type of the state that is stored in each search node. AbstractAStarNode contains methods for
+getting/setting a nodes graph cost(g), heuristic score(h), total score(f), state representation, and parent node. 
+Classes that extend AbstractAStarNode must implement methods that generate successor nodes, calculates the search graph
+distance from the nodes parent, generate a hash code based on state, and an equals method that is based on the node's
+state. Essentially a state space search problem must be represented by a class that extends AbstractAStarNode.
 
 Besides the creating the classes that represent the search nodes, you must also provide a heuristic function that can
 score how close a node is to the goal node. Heuristic functions in this framework are represented by IHeuristicFunction.
 
-After creating a class that represents a state space search problem and heuristic function, you then create search space
-nodes that represents the initial and goal state and an instance of your desired heuristic function. Next you supply
-these two nodes to either AStarSearch or  IDAStarSearch's constructor. To begin the search method is called to begin the
-search, both AStarSearch and IDAStarSearch provide a search method. The  search method will return the final node on the 
-search path, or null if the goal state cannot be found. To generate the full path as a list, call the getPath method
-supplying it the node returned from the search method.
+After creating a class that represents a state space search problem and a heuristic function, you then create search
+space nodes that represents the initial and goal state and an instance of your desired heuristic function. Next you 
+supply these two nodes and heuristic function to either AStarSearch or IDAStarSearch's constructor. To begin the search,
+the search() method is called; both AStarSearch and IDAStarSearch provide the search() method. The search method will 
+return the final node on the search path, or null if the goal state cannot be found. To generate the full path as a 
+list, call the getPath() method supplying it the node returned from the search method.
 
 
 To summarize, in order to perform a state space search:
-1. Create a class that extends AStarNode which represents the state space search problem
-1. Create a class that IHeuristicFunction  which represents a heuristic function
-2. Create two search node that represent the initial and goal state of the search problem
-3. Create an instance of AStarSearch or IDAStarSearch and supply the two nodes created above
-4. Call the search method provided by AStarSearch or IDAStarSearch
-5. To get the search path, provide the node returned by the search method to the getPath method
+1. Create a class that extends AbstractAStarNode which represents the state space search problem
+2. Create a class that IHeuristicFunction  which represents a heuristic function
+3. Create two search node that represent the initial and goal state of the search problem
+4. Create an instance of AStarSearch or IDAStarSearch and supply the two nodes created above and the heuristic function
+5. Call the search method provided by AStarSearch or IDAStarSearch
+6. To get the resulting path, provide the node returned by the search method to the getPath method
 
 A quick abstract example on how to use the searcher:
 ```java
@@ -74,7 +74,6 @@ AStarSearch searcher = new AStarSearch(initialState, goalState, heuristic);
 AStarNode finalSearchNode = searcher.search();
 
 List<AStarNode> path = searcher.getPath(finalSearchNode);
-
 ```
 
 Below are some implemented state space search problems to follow as examples.
@@ -82,7 +81,9 @@ Below are some implemented state space search problems to follow as examples.
 
 ## Implemented Search Problem
 
-Each of these state space search problems' have a demo implemented as a main method in their associated AStateNode extensions.
+Each of these state space search problems' have a demo implemented as a main method in their associated classes.
+
+Here is an example of constructing the necessary classes to perform a state space search - [link](https://github.com/JKnighten/a-star-search/wiki/Example:-Creating-An-State-Space-Search-Problem-For-A*).
 
 
 ### Three Puzzle
@@ -97,6 +98,17 @@ to reach the goal configuration.
 Let there be a 3x3 grid filled with 8 tiles(one grid space is an empty space). Tiles adjacent to the empty space can be
 slid into the empty space. Given and initial tile configuration and a goal configuration, find the necessary tile moves
 to reach the goal configuration.
+
+### Navigate A Maze
+
+Given an maze and its start and end point, find the shortest path between the start and end.
+
+### Navigate Some Terrain
+
+Given a terrain and a start and end point, find the path that is easiest to traverse between the start and end 
+point. This is similar to the maze problem, but now instead of just having simple paths there are now paths that
+are harder to traverse than others. For instance instead of walking along a flat path, it is harder to walk up hill or
+swim across water.
 
 
 

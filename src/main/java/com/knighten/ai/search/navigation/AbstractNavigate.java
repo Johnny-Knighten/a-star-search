@@ -126,7 +126,7 @@ public abstract class AbstractNavigate extends AbstractAStarNode<int[]> {
 
             }
 
-            if(row != (numberOfRows - 1))
+            if(row != (this.numberOfRows - 1))
                 builder.append('\n');
         }
 
