@@ -5,6 +5,7 @@ import com.knighten.ai.search.AbstractAStarNode;
 import com.knighten.ai.search.interfaces.IHeuristicFunction;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -26,6 +27,13 @@ public class NavigateTerrain extends AbstractNavigate {
      */
     public NavigateTerrain(int[][] terrain, int currentRow, int currentCol) {
         super(terrain, currentRow, currentCol);
+
+        boolean valueCheck = Arrays.stream(terrain)
+                .flatMapToInt(Arrays::stream)
+                .anyMatch((i) -> i < 0);
+
+        if(valueCheck)
+            throw new IllegalArgumentException("Values Inside A Terrain Must Be 0 Or Greater");
     }
 
     /**

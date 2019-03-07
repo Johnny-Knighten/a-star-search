@@ -23,7 +23,6 @@ public class NavigateMaze extends AbstractNavigate {
      * @param currentCol the column of the current position
      */
     public NavigateMaze(int[][] maze, int currentRow, int currentCol) {
-
         super(maze, currentRow, currentCol);
 
         boolean valueCheck = Arrays.stream(maze)
