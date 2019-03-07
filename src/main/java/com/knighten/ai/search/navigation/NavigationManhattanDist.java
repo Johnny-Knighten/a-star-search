@@ -19,6 +19,10 @@ public class NavigationManhattanDist implements IHeuristicFunction {
      * @param goalNode the node the heuristic function always uses
      */
     public NavigationManhattanDist(AbstractNavigate goalNode) {
+
+        if (goalNode == null)
+            throw new IllegalArgumentException("Goal Node Cannot Be Null");
+
         this.goalNode = goalNode;
     }
 
@@ -30,8 +34,15 @@ public class NavigationManhattanDist implements IHeuristicFunction {
      */
     @Override
     public double calculateHeuristic(AbstractAStarNode searchNode) {
-        int diffOfCols = Math.abs(this.goalNode.getState()[0] - ((AbstractNavigate) searchNode).getState()[0]);
-        int diffOfRows = Math.abs(this.goalNode.getState()[1] - ((AbstractNavigate) searchNode).getState()[1]);
+
+        if (searchNode == null)
+            throw new IllegalArgumentException("Search Node Cannot Be Null");
+
+        int[] goalNodePosition = this.goalNode.getState();
+        int[] searchNodePosition = ((AbstractNavigate) searchNode).getState();
+
+        int diffOfCols = Math.abs(goalNodePosition[0] - searchNodePosition[0]);
+        int diffOfRows = Math.abs(goalNodePosition[1] - searchNodePosition[1]);
         return diffOfCols + diffOfRows;
     }
 
