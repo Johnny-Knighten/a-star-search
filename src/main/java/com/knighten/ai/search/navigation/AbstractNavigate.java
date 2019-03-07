@@ -11,16 +11,6 @@ import java.util.Arrays;
 public abstract class AbstractNavigate extends AbstractAStarNode<int[]> {
 
     /**
-     * The row of the current position. This is 0 indexed.
-     */
-    private int currentRow;
-
-    /**
-     * The column of the current position. This is 0 indexed.
-     */
-    private int currentCol;
-
-    /**
      * The environment being navigated. It is assumed the environment is not a jagged array.
      */
     private int[][] environment;
@@ -44,10 +34,20 @@ public abstract class AbstractNavigate extends AbstractAStarNode<int[]> {
      * @param currentCol  the current column position
      */
     public AbstractNavigate(int[][] environment, int currentRow, int currentCol) {
-        this.environment = environment;
-        this.currentRow = currentRow;
-        this.currentCol = currentCol;
 
+
+        if(environment == null)
+            throw new IllegalArgumentException("The Environment Being Traversed Cannot Be Null");
+
+        if (currentRow < 0 || currentRow >= environment.length)
+            throw new IllegalArgumentException("The Row Position Is Not Contained In The Environment, It Must Be" +
+                    "Between 0 and Number Of Rows - 1");
+
+        if (currentCol < 0 || currentCol >= environment[0].length)
+            throw new IllegalArgumentException("The Column Position Is Not Contained In The Environment, It Must Be" +
+                    "Between 0 and Number Of Columns - 1");
+
+        this.environment = environment;
         this.setState(new int[]{currentRow, currentCol});
 
         this.numberOfRows = environment.length;
@@ -116,17 +116,17 @@ public abstract class AbstractNavigate extends AbstractAStarNode<int[]> {
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
-        for (int row = 0; row < this.numberOfRows; row++) {
-            for (int column = 0; column < this.numberOfCols; column++) {
+        for (int row = 0; row < this.getNumberOfRows(); row++) {
+            for (int column = 0; column < this.getNumberOfCols(); column++) {
 
-                if (row == this.currentRow && column == this.currentCol)
+                if (row == this.getState()[0] && column == this.getState()[1])
                     builder.append("* ");
                 else
-                    builder.append(Integer.toString(this.environment[row][column]) + ' ');
+                    builder.append(Integer.toString(this.getEnvironment()[row][column]) + ' ');
 
             }
 
-            if (row != (this.numberOfRows - 1))
+            if (row != (this.getNumberOfRows() - 1))
                 builder.append('\n');
         }
 

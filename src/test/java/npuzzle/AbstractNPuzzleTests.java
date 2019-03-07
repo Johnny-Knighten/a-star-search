@@ -58,19 +58,19 @@ public class AbstractNPuzzleTests {
     @Test
     public void hashCodeMatchesEqualsWithSamePuzzle() {
 
-        boolean equalsValue  = mockPuzzleStateIsGoal.equals(mockPuzzleStateIsGoal);
+        boolean equalsValue = mockPuzzleStateIsGoal.equals(mockPuzzleStateIsGoal);
         boolean hashEqual = mockPuzzleStateIsGoal.hashCode() == mockPuzzleStateIsGoal.hashCode();
 
-        Assert.assertTrue( equalsValue == hashEqual);
+        Assert.assertTrue(equalsValue == hashEqual);
     }
 
     @Test
-    public void hashCodeMatchesEqualsWithDifferentuzzle() {
+    public void hashCodeMatchesEqualsWithDifferentPuzzle() {
 
-        boolean equalsValue  = mockPuzzleStateIsGoal.equals(getMockPuzzleStateIsGoalReversed);
+        boolean equalsValue = mockPuzzleStateIsGoal.equals(getMockPuzzleStateIsGoalReversed);
         boolean hashEqual = mockPuzzleStateIsGoal.hashCode() == getMockPuzzleStateIsGoalReversed.hashCode();
 
-        Assert.assertTrue( equalsValue == hashEqual);
+        Assert.assertTrue(equalsValue == hashEqual);
     }
 
     @Test
